@@ -47,18 +47,18 @@ class DBService {
     }
   }
 
-  // Future<void> delete(int id) async {
-  //   try {
-  //     final db = await database;
-  //     await db.delete(
-  //       'todo',
-  //       where: '${AppConst.id} = ?',
-  //       whereArgs: [id],
-  //     );
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
+  Future<void> delete(int id) async {
+    try {
+      final db = await database;
+      await db.delete(
+        'todo',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   // Future<void> update(ToDoModel todo) async {
   //   try {
