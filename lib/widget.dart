@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 
 import 'package:to_do_app/toDo.dart';
 
-class TodoWidget extends StatelessWidget {
+class TodoWidget extends StatefulWidget {
   final ToDo todo;
-  final VoidCallback onDeletePressed;
 
-  const TodoWidget({
+  TodoWidget({
     Key? key,
     required this.todo,
-    required this.onDeletePressed,
   }) : super(key: key);
 
   @override
+  State<TodoWidget> createState() => _TodoWidgetState();
+}
+
+class _TodoWidgetState extends State<TodoWidget> {
+  final DBService dbService = DBService();
+
+  _delete(int id) async {
+    await dbService.delete(id);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final string = DateFormat("yyyy-MM-dd HH:mm:ss").parse(todo.createdAt);
+    final string =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(widget.todo.createdAt);
 
     return InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return AddTodo(
-              todo: todo,
+              todo: widget.todo,
             );
           }));
         },
@@ -37,17 +48,16 @@ class TodoWidget extends StatelessWidget {
               leading: Icon(Icons.bug_report_sharp),
               trailing: IconButton(
                 onPressed: () {
-                  onDeletePressed;
+                  _delete(widget.todo.id);
+                  setState(() {});
                 },
-                icon: Center(
-                  child: Icon(
-                    Icons.delete_outline,
-                    color: Colors.red,
-                  ),
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Colors.red,
                 ),
               ),
               subtitle: Text(
-                todo.title,
+                widget.todo.title,
                 style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,

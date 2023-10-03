@@ -79,10 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     final todo = myTodos[index];
                     return TodoWidget(
                       todo: todo,
-                      onDeletePressed: () {
-                        // delete(todo: todo, context: context);
-                        getTodos();
-                      },
                     );
                   },
                   itemCount: myTodos.length,
