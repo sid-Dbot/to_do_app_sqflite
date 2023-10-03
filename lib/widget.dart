@@ -5,7 +5,7 @@ import 'package:to_do_app/addto.dart';
 
 import 'package:to_do_app/toDo.dart';
 
-class TodoWidget extends StatefulWidget {
+class TodoWidget extends StatelessWidget {
   final ToDo todo;
 
   TodoWidget({
@@ -13,11 +13,6 @@ class TodoWidget extends StatefulWidget {
     required this.todo,
   }) : super(key: key);
 
-  @override
-  State<TodoWidget> createState() => _TodoWidgetState();
-}
-
-class _TodoWidgetState extends State<TodoWidget> {
   final DBService dbService = DBService();
 
   _delete(int id) async {
@@ -26,14 +21,13 @@ class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final string =
-        DateFormat("yyyy-MM-dd HH:mm:ss").parse(widget.todo.createdAt);
+    final string = DateFormat("yyyy-MM-dd HH:mm:ss").parse(todo.createdAt);
 
     return InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return AddTodo(
-              todo: widget.todo,
+              todo: todo,
             );
           }));
         },
@@ -48,8 +42,7 @@ class _TodoWidgetState extends State<TodoWidget> {
               leading: Icon(Icons.bug_report_sharp),
               trailing: IconButton(
                 onPressed: () {
-                  _delete(widget.todo.id);
-                  setState(() {});
+                  _delete(todo.id);
                 },
                 icon: Icon(
                   Icons.delete_outline,
@@ -57,7 +50,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                 ),
               ),
               subtitle: Text(
-                widget.todo.title,
+                todo.title,
                 style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,

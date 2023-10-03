@@ -40,7 +40,12 @@ class _AddTodoState extends State<AddTodo> {
     super.dispose();
   }
 
-  void addTodo(ToDo dog) async {
+  void addTodo() async {
+    ToDo dog = ToDo(
+        id: DateTime.now().microsecondsSinceEpoch,
+        title: titleController.text,
+        createdAt: DateTime.now().toString());
+
     await dbService.insert(todo: dog);
     Navigator.pop(context);
   }
@@ -59,12 +64,7 @@ class _AddTodoState extends State<AddTodo> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             onPressed: () async {
-              ToDo dog = ToDo(
-                  id: DateTime.now().microsecondsSinceEpoch,
-                  title: titleController.text,
-                  createdAt: DateTime.now().toString());
-
-              addTodo(dog);
+              addTodo();
             },
             child: const Text(
               'Add todo',
@@ -75,6 +75,7 @@ class _AddTodoState extends State<AddTodo> {
       ],
       title: Text('Add Todo'),
       content: TextFormField(
+        onFieldSubmitted: (value) => addTodo(),
         controller: titleController,
         decoration: const InputDecoration(
             label: const Text('Todo title'), hintText: 'Develop amazing app '),
