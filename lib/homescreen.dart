@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 import 'package:to_do_app/dBrepo.dart';
-import 'package:to_do_app/dog.dart';
+
 import 'package:to_do_app/toDo.dart';
 import 'package:to_do_app/widget.dart';
-import 'dogRepo.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           ),
@@ -62,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         appBar: AppBar(
           title: const Text('My todos'),
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Icon(Icons.menu),
             )
           ],
@@ -75,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {});
           },
           child: myTodos.isEmpty
-              ? const Center(child: const Text('You don\'t have any todos yet'))
+              ? const Center(child: Text('You don\'t have any todos yet'))
               : ListView.separated(
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 20,
                   ),
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   itemBuilder: (context, index) {
                     final todo = myTodos[index];
                     return TodoWidget(
