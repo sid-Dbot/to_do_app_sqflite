@@ -26,7 +26,6 @@ class DBService {
       onCreate: (db, version) => db.execute(
           'CREATE TABLE IF NOT EXISTS todo(id INTEGER PRIMARY KEY,title TEXT,createdAt TEXT)'),
     );
-
     return database;
   }
 

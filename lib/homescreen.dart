@@ -62,6 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         appBar: AppBar(
           title: const Text('My todos'),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.menu),
+            )
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {
