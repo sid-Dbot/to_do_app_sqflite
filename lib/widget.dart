@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 
-import 'package:to_do_app/toDo.dart';
+import 'package:to_do_app/Models/toDo.dart';
 
-class TodoWidget extends StatelessWidget {
+class TodoWidget extends StatefulWidget {
   final ToDo todo;
 
   TodoWidget({
@@ -13,7 +13,13 @@ class TodoWidget extends StatelessWidget {
     required this.todo,
   }) : super(key: key);
 
+  @override
+  State<TodoWidget> createState() => _TodoWidgetState();
+}
+
+class _TodoWidgetState extends State<TodoWidget> {
   final DBService dbService = DBService();
+  bool _done = false;
 
   _delete(int id) async {
     await dbService.delete(id);
@@ -21,7 +27,8 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final string = DateFormat("yyyy-MM-dd HH:mm:ss").parse(todo.createdAt);
+    final string =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(widget.todo.createdAt);
 
     return InkWell(
         onTap: () {
@@ -42,9 +49,10 @@ class TodoWidget extends StatelessWidget {
             children: [
               Checkbox(
                   onChanged: (value) {
-                    value = value!;
+                    _done = value!;
+                    setState(() {});
                   },
-                  value: false),
+                  value: _done),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +62,7 @@ class TodoWidget extends StatelessWidget {
                     style: const TextStyle(color: Colors.black54, fontSize: 12),
                   ),
                   Text(
-                    todo.title,
+                    widget.todo.title,
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -67,7 +75,7 @@ class TodoWidget extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: IconButton(
                     onPressed: () {
-                      _delete(todo.id);
+                      _delete(widget.todo.id);
                     },
                     icon: Icon(
                       Icons.delete_outline,

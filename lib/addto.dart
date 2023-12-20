@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:to_do_app/DB/db_service.dart';
 
-import 'package:to_do_app/toDo.dart';
+import 'package:to_do_app/Models/toDo.dart';
 
 class AddTodo extends StatefulWidget {
   ToDo? todo;

@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:to_do_app/toDo.dart';
+import 'package:to_do_app/Models/toDo.dart';
 
 class DBService {
   Database? _database;

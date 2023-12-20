@@ -3,7 +3,7 @@ import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 import 'package:to_do_app/dBrepo.dart';
 
-import 'package:to_do_app/toDo.dart';
+import 'package:to_do_app/Models/toDo.dart';
 import 'package:to_do_app/widget.dart';
 
 class HomeScreen extends StatefulWidget {
