@@ -39,32 +39,39 @@ class TodoWidget extends StatelessWidget {
               color: Colors.grey.withOpacity(0.1)),
           child: Card(
             elevation: 8,
-            child: ListTile(
-              leading: Checkbox(
-                  onChanged: (value) {
-                    value = value!;
-                  },
-                  value: false),
-              trailing: IconButton(
-                onPressed: () {
-                  _delete(todo.id);
-                },
-                icon: Icon(
-                  Icons.delete_outline,
-                  color: Colors.red,
+            child: Row(
+              children: [
+                Checkbox(
+                    onChanged: (value) {
+                      value = value!;
+                    },
+                    value: false),
+                Column(
+                  children: [
+                    Text(
+                      DateFormat.yMMMd().format(string).toString(),
+                      style:
+                          const TextStyle(color: Colors.black54, fontSize: 14),
+                    ),
+                    Text(
+                      todo.title,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
-              ),
-              subtitle: Text(
-                todo.title,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              title: Text(
-                DateFormat.yMMMd().format(string).toString(),
-                style: const TextStyle(color: Colors.black54, fontSize: 14),
-              ),
+                IconButton(
+                  onPressed: () {
+                    _delete(todo.id);
+                  },
+                  icon: Icon(
+                    Icons.delete_outline,
+                    color: Colors.red,
+                  ),
+                ),
+              ],
             ),
           ),
         ));
