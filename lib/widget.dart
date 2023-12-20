@@ -4,6 +4,7 @@ import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 
 import 'package:to_do_app/Models/toDo.dart';
+import 'package:to_do_app/mySharedPrefrences.dart';
 
 class TodoWidget extends StatefulWidget {
   final ToDo todo;
@@ -19,7 +20,7 @@ class TodoWidget extends StatefulWidget {
 
 class _TodoWidgetState extends State<TodoWidget> {
   final DBService dbService = DBService();
-  bool _done = false;
+  bool _done = MySharedPrefrences.light;
 
   _delete(int id) async {
     await dbService.delete(id);
@@ -50,6 +51,7 @@ class _TodoWidgetState extends State<TodoWidget> {
               Checkbox(
                   onChanged: (value) {
                     _done = value!;
+                    MySharedPrefrences.setTheme(_done);
                     setState(() {});
                   },
                   value: _done),
