@@ -39,7 +39,11 @@ class TodoWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.grey.withOpacity(0.1)),
             child: ListTile(
-              leading: Icon(Icons.bug_report_sharp),
+              leading: Checkbox(
+                  onChanged: (value) {
+                    value = value!;
+                  },
+                  value: false),
               trailing: IconButton(
                 onPressed: () {
                   _delete(todo.id);
