@@ -59,35 +59,37 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        appBar: AppBar(
-          title: const Text('My todos'),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.menu),
-            )
-          ],
-        ),
-        body: RefreshIndicator(
-          onRefresh: () async {
-            getTodos();
-            setState(() {});
-          },
-          child: myTodos.isEmpty
-              ? const Center(child: Text('You don\'t have any todos yet'))
-              : ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 20,
+        // appBar: AppBar(
+        //   title: const Text('My todos'),
+        //   actions: const [
+        //     Padding(
+        //       padding: EdgeInsets.all(8.0),
+        //       child: Icon(Icons.menu),
+        //     )
+        //   ],
+        // ),
+        body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              getTodos();
+              setState(() {});
+            },
+            child: myTodos.isEmpty
+                ? const Center(child: Text('You don\'t have any todos yet'))
+                : ListView.separated(
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 20,
+                    ),
+                    padding: const EdgeInsets.all(16),
+                    itemBuilder: (context, index) {
+                      final todo = myTodos[index];
+                      return TodoWidget(
+                        todo: todo,
+                      );
+                    },
+                    itemCount: myTodos.length,
                   ),
-                  padding: const EdgeInsets.all(16),
-                  itemBuilder: (context, index) {
-                    final todo = myTodos[index];
-                    return TodoWidget(
-                      todo: todo,
-                    );
-                  },
-                  itemCount: myTodos.length,
-                ),
+          ),
         ));
   }
 }

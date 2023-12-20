@@ -46,16 +46,18 @@ class TodoWidget extends StatelessWidget {
                   },
                   value: false),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     DateFormat.yMMMd().format(string).toString(),
-                    style: const TextStyle(color: Colors.black54, fontSize: 14),
+                    style: const TextStyle(color: Colors.black54, fontSize: 12),
                   ),
                   Text(
                     todo.title,
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),
                 ],
