@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         myTodos = value;
       });
-    }).catchError((e) => debugPrint(e.toString()));
+    });
   }
 
   void delete({required ToDoModel todo, required BuildContext context}) async {
