@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const Center(child: Text('You don\'t have any todos yet'))
               : ListView.separated(
                   separatorBuilder: (context, index) => const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   padding: const EdgeInsets.all(16),
                   itemBuilder: (context, index) {
