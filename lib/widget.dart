@@ -20,7 +20,7 @@ class TodoWidget extends StatefulWidget {
 
 class _TodoWidgetState extends State<TodoWidget> {
   final DBService dbService = DBService();
-  bool _done = MySharedPrefrences.light;
+  bool _done = false;
 
   _delete(int id) async {
     await dbService.delete(id);
@@ -45,13 +45,14 @@ class _TodoWidgetState extends State<TodoWidget> {
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: Colors.grey.withOpacity(0.1)),
+              color:
+                  MySharedPrefrences.light ? Colors.black12 : Colors.black45),
           child: Row(
             children: [
               Checkbox(
                   onChanged: (value) {
                     _done = value!;
-                    MySharedPrefrences.setTheme(_done);
+
                     setState(() {});
                   },
                   value: _done),
@@ -61,12 +62,15 @@ class _TodoWidgetState extends State<TodoWidget> {
                 children: [
                   Text(
                     DateFormat.yMMMd().format(string).toString(),
-                    style: const TextStyle(color: Colors.black54, fontSize: 12),
+                    style: const TextStyle(
+                      // color: Colors.black54,
+                      fontSize: 12,
+                    ),
                   ),
                   Text(
                     widget.todo.title,
                     style: const TextStyle(
-                        color: Colors.black,
+                        // color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.w600),
                   ),

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 import 'package:to_do_app/dBrepo.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:to_do_app/Models/toDo.dart';
+import 'package:to_do_app/main.dart';
+import 'package:to_do_app/mySharedPrefrences.dart';
+import 'package:to_do_app/provider.dart';
 import 'package:to_do_app/widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DBService dbService = DBService();
+  bool _themeIsLight = MySharedPrefrences.light;
   @override
   void initState() {
     getTodos();
@@ -32,6 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  _getData() async {
+    var response = await http.get(Uri.parse('http://localhost:5000/api/users'));
+    print(response);
+  }
+
   void delete({required ToDoModel todo, required BuildContext context}) async {
     DatabaseRepository.instance.delete(todo.id).then((value) {
       ScaffoldMessenger.of(context)
@@ -45,12 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     getTodos();
+
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: const Icon(
+          backgroundColor:
+              MySharedPrefrences.light ? Colors.white : Colors.grey,
+          child: Icon(
             Icons.add,
-            color: Colors.white,
           ),
           onPressed: () {
             showDialog(
@@ -59,35 +70,96 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        // appBar: AppBar(
-        //   title: const Text('My todos'),
-        //   actions: const [
-        //     Padding(
-        //       padding: EdgeInsets.all(8.0),
-        //       child: Icon(Icons.menu),
-        //     )
-        //   ],
-        // ),
+        appBar: AppBar(
+          title: Center(child: const Text('My todos')),
+          actions: [
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: GestureDetector(
+                onTap: () {
+                  if (MySharedPrefrences.light) {
+                    MySharedPrefrences.setTheme(false);
+                    MyApp.themeNotifier.value = ThemeMode.dark;
+                  } else {
+                    MySharedPrefrences.setTheme(true);
+                    MyApp.themeNotifier.value = ThemeMode.light;
+                  }
+                },
+                child: Icon(
+                  MySharedPrefrences.light ? Icons.light_mode : Icons.dark_mode,
+                ),
+              ),
+            )
+          ],
+        ),
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
               getTodos();
+              _getData();
               setState(() {});
             },
             child: myTodos.isEmpty
                 ? const Center(child: Text('You don\'t have any todos yet'))
-                : ListView.separated(
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 20,
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    itemBuilder: (context, index) {
-                      final todo = myTodos[index];
-                      return TodoWidget(
-                        todo: todo,
-                      );
-                    },
-                    itemCount: myTodos.length,
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 20,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          itemBuilder: (context, index) {
+                            final todo = myTodos[index];
+                            return TodoWidget(
+                              todo: todo,
+                            );
+                          },
+                          itemCount: myTodos.length,
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16))),
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            MySharedPrefrences.setTheme(false);
+                                            MyApp.themeNotifier.value =
+                                                ThemeMode.dark;
+
+                                            // context.read(themeProvider.notifier).toggleTheme();
+
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('Dark')),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            MySharedPrefrences.setTheme(true);
+                                            MyApp.themeNotifier.value =
+                                                ThemeMode.light;
+                                            // context.read(themeProvider.notifier).toggleTheme();
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('Light'))
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Text('Select Theme'))
+                    ],
                   ),
           ),
         ));
