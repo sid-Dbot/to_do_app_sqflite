@@ -11,19 +11,20 @@ import 'package:to_do_app/mySharedPrefrences.dart';
 import 'package:to_do_app/provider.dart';
 import 'package:to_do_app/widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   DBService dbService = DBService();
-  bool _themeIsLight = MySharedPrefrences.light;
+
   @override
   void initState() {
     getTodos();
+    ref.read(todoProvider.notifier).getTodos();
 
     super.initState();
   }
@@ -81,14 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (MySharedPrefrences.light) {
                       MySharedPrefrences.setTheme(false);
-                      ref.read(themeProvider.notifier).state = ThemeData.dark();
+                      // ref.read(themeProvider.notifier).state = ThemeData.dark();
                       ref.read(themeModeProvider.notifier).state =
                           ThemeMode.dark;
                       // MyApp.themeNotifier.value = ThemeMode.dark;
                     } else {
                       MySharedPrefrences.setTheme(true);
-                      ref.read(themeProvider.notifier).state =
-                          ThemeData.light();
+                      // ref.read(themeProvider.notifier).state =
+                      //     ThemeData.light();
                       ref.read(themeModeProvider.notifier).state =
                           ThemeMode.light;
                       // MyApp.themeNotifier.value = ThemeMode.light;

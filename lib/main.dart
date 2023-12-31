@@ -15,12 +15,11 @@ void main() async {
 class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
     final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
       title: 'Theme Switcher',
-      theme: theme,
+      theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
       home: HomeScreen(),
