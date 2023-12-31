@@ -40,7 +40,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   _getData() async {
-    var response = await http.get(Uri.parse('http://localhost:5000/api/users'));
+    var response =
+        await http.get(Uri.parse('http://localhost:5084/weatherforecast'));
     print(response);
   }
 
