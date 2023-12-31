@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 import 'package:to_do_app/dBrepo.dart';
@@ -75,20 +76,31 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             Padding(
               padding: EdgeInsets.all(12.0),
-              child: GestureDetector(
-                onTap: () {
-                  if (MySharedPrefrences.light) {
-                    MySharedPrefrences.setTheme(false);
-                    MyApp.themeNotifier.value = ThemeMode.dark;
-                  } else {
-                    MySharedPrefrences.setTheme(true);
-                    MyApp.themeNotifier.value = ThemeMode.light;
-                  }
-                },
-                child: Icon(
-                  MySharedPrefrences.light ? Icons.light_mode : Icons.dark_mode,
-                ),
-              ),
+              child: Consumer(builder: (context, ref, child) {
+                return GestureDetector(
+                  onTap: () {
+                    if (MySharedPrefrences.light) {
+                      MySharedPrefrences.setTheme(false);
+                      ref.read(themeProvider.notifier).state = ThemeData.dark();
+                      ref.read(themeModeProvider.notifier).state =
+                          ThemeMode.dark;
+                      // MyApp.themeNotifier.value = ThemeMode.dark;
+                    } else {
+                      MySharedPrefrences.setTheme(true);
+                      ref.read(themeProvider.notifier).state =
+                          ThemeData.light();
+                      ref.read(themeModeProvider.notifier).state =
+                          ThemeMode.light;
+                      // MyApp.themeNotifier.value = ThemeMode.light;
+                    }
+                  },
+                  child: Icon(
+                    MySharedPrefrences.light
+                        ? Icons.light_mode
+                        : Icons.dark_mode,
+                  ),
+                );
+              }),
             )
           ],
         ),
@@ -135,8 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ElevatedButton(
                                           onPressed: () {
                                             MySharedPrefrences.setTheme(false);
-                                            MyApp.themeNotifier.value =
-                                                ThemeMode.dark;
+                                            // MyApp.themeNotifier.value =
+                                            //     ThemeMode.dark;
 
                                             // context.read(themeProvider.notifier).toggleTheme();
 
@@ -146,8 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ElevatedButton(
                                           onPressed: () {
                                             MySharedPrefrences.setTheme(true);
-                                            MyApp.themeNotifier.value =
-                                                ThemeMode.light;
+                                            // MyApp.themeNotifier.value =
+                                            //     ThemeMode.light;
                                             // context.read(themeProvider.notifier).toggleTheme();
                                             Navigator.pop(context);
                                           },

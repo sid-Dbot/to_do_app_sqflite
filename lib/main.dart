@@ -12,27 +12,43 @@ void main() async {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.light);
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeNotifier,
-        builder: (_, ThemeMode currentMode, __) {
-          return MaterialApp(
-            // Remove the debug banner
-            debugShowCheckedModeBanner: false,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(themeProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
-            theme: ThemeData(
-                primarySwatch: Colors.cyan, brightness: Brightness.light),
-            darkTheme: ThemeData(
-                primarySwatch: Colors.cyan, brightness: Brightness.dark),
-            themeMode: currentMode,
-            home: const HomeScreen(),
-          );
-        });
+    return MaterialApp(
+      title: 'Theme Switcher',
+      theme: theme,
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
+      home: HomeScreen(),
+    );
   }
 }
+
+// class MyApp extends StatelessWidget {
+//   static final ValueNotifier<ThemeMode> themeNotifier =
+//       ValueNotifier(ThemeMode.light);
+//   @override
+//   Widget build(
+//     BuildContext context,
+//   ) {
+//     return ValueListenableBuilder<ThemeMode>(
+//         valueListenable: themeNotifier,
+//         builder: (_, ThemeMode currentMode, __) {
+//           return MaterialApp(
+//             // Remove the debug banner
+//             debugShowCheckedModeBanner: false,
+
+//             theme: ThemeData(
+//                 primarySwatch: Colors.cyan, brightness: Brightness.light),
+//             darkTheme: ThemeData(
+//                 primarySwatch: Colors.cyan, brightness: Brightness.dark),
+//             themeMode: currentMode,
+//             home: const HomeScreen(),
+//           );
+//         });
+//   }
+// }
