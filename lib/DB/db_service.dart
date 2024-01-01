@@ -27,7 +27,7 @@ class DBService {
           'CREATE TABLE IF NOT EXISTS todo(id INTEGER PRIMARY KEY,title TEXT,createdAt TEXT)'),
       onUpgrade: (db, oldVersion, newVersion) {
         db.execute(
-            'CREATE TABLE todos(id INTEGER PRIMARY KEY auto_increment,title TEXT,description TEXT,isDone BOOL)');
+            'CREATE TABLE IF NOT EXISTS todos(id INTEGER PRIMARY KEY auto_increment,title TEXT,description TEXT,isDone BOOL)');
         db.execute('DROP TABLE todo');
       },
     );
