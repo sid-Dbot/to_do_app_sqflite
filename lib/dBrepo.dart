@@ -18,7 +18,8 @@ class DatabaseRepository {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path,
+        version: 1, onCreate: _createDB, onUpgrade: _updateDB);
   }
 
   Future _createDB(Database db, int version) async {
@@ -26,8 +27,18 @@ class DatabaseRepository {
 create table ${AppConst.tableName} ( 
   ${AppConst.id} integer primary key autoincrement, 
   ${AppConst.title} text not null,
-   ${AppConst.discribtion} text not null,
-  ${AppConst.isImportant} boolean not null)
+   ${AppConst.describtion} text not null,
+  ${AppConst.isDone} boolean not null)
+''');
+  }
+
+  Future _updateDB(Database db, int version, int newVersion) async {
+    await db.execute('''
+create table ${AppConst.tableName} ( 
+  ${AppConst.id} integer primary key autoincrement, 
+  ${AppConst.title} text not null,
+   ${AppConst.describtion} text not null,
+  ${AppConst.isDone} boolean not null)
 ''');
   }
 
@@ -77,9 +88,9 @@ create table ${AppConst.tableName} (
 }
 
 class AppConst {
-  static const String isImportant = 'isImportant';
+  static const String isDone = 'isDone';
   static const String id = 'id';
   static const String title = 'title';
-  static const String discribtion = 'describtion';
+  static const String describtion = 'describtion';
   static const String tableName = 'todoTable1';
 }
