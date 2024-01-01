@@ -24,13 +24,12 @@ class DBService {
     var database = await openDatabase(
       path,
       version: 2,
-      onCreate: (db, version) => db.execute(
-        'CREATE TABLE IF NOT EXISTS $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)',
-      ),
+      onCreate: (db, version) {
+        db.execute('DROP TABLE todo');
+      },
       onUpgrade: (db, oldVersion, newVersion) {
         db.execute(
             'CREATE TABLE  $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)');
-        db.execute('DROP TABLE todo');
       },
     );
     return database;
