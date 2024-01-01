@@ -29,7 +29,7 @@ class DBService {
       ),
       onUpgrade: (db, oldVersion, newVersion) {
         db.execute(
-            'CREATE TABLE IF NOT EXISTS $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)');
+            'CREATE TABLE  $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)');
         db.execute('DROP TABLE todo');
       },
     );
