@@ -22,9 +22,13 @@ class DBService {
     final path = await fullPath;
     var database = await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) => db.execute(
-          'CREATE TABLE IF NOT EXISTS todo(id INTEGER PRIMARY KEY,title TEXT,createdAt TEXT)'),
+          'CREATE TABLE IF NOT EXISTS todo(id INTEGER PRIMARY KEY,title TEXT,createdAt TEXT)'),onUpgrade: (db, oldVersion, newVersion) {
+            if(oldVersion >2){
+              db.execute('CREATE TABLE todos(id INTEGER PRIMARY KEY,title TEXT,description)')
+            }
+          },
     );
     return database;
   }

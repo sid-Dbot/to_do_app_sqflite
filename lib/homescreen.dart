@@ -40,8 +40,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   _getData() async {
-    var response =
-        await http.get(Uri.parse('http://localhost:5084/weatherforecast'));
+    var response = await http
+        .get(Uri.parse('http://localhost:5000/weatherforecast'), headers: {});
     print(response);
   }
 
@@ -67,6 +67,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Icons.add,
           ),
           onPressed: () {
+            _getData();
             showDialog(
               context: context,
               builder: (context) => AddTodo(),
@@ -126,10 +127,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           itemBuilder: (context, index) {
                             final todo = myTodos[index];
                             return TodoWidget(
-                              todo: todo,
+                              todo:
+                                  ref.watch(todoProvider.notifier).state[index],
                             );
                           },
-                          itemCount: myTodos.length,
+                          itemCount:
+                              ref.watch(todoProvider.notifier).state.length,
                         ),
                       ),
                       ElevatedButton(

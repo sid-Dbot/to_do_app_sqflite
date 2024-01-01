@@ -1,27 +1,27 @@
 class ToDoModel {
   final int id;
-  final bool isImportant;
+  final bool isDone;
   final String title;
-  final String discribtion;
+  final String describtion;
   ToDoModel(
       {required this.title,
       required this.id,
-      required this.discribtion,
-      required this.isImportant});
+      required this.describtion,
+      required this.isDone});
   factory ToDoModel.fromJson(Map<String, dynamic> map) {
     return ToDoModel(
       title: map['title'],
       id: map['id'],
-      discribtion: map['discribtion'],
-      isImportant: map['isImportant'],
+      describtion: map['describtion'],
+      isDone: map['isDone'],
     );
   }
   Map<String, dynamic> toMap() {
     return {
       'title': title,
       'id': id,
-      'discribtion': discribtion,
-      'isImportant': isImportant,
+      'describtion': describtion,
+      'isDone': isDone,
     };
   }
 }
