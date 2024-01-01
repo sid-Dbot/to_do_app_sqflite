@@ -22,7 +22,7 @@ class DBService {
     final path = await fullPath;
     var database = await openDatabase(
       path,
-      version: 2,
+      version: 1,
       onCreate: (db, version) => db.execute(
           'CREATE TABLE todos(id INTEGER PRIMARY KEY auto_increment,title TEXT,description TEXT,isDone BOOL)'),
       // onUpgrade: (db, oldVersion, newVersion) {
