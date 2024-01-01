@@ -21,16 +21,18 @@ class DBService {
 
   Future<Database> init() async {
     final path = await fullPath;
-    var database = await openDatabase(path,
-        version: 2,
-        onCreate: (db, version) => db.execute(
-              'CREATE TABLE IF NOT EXISTS $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)',
-              // onUpgrade: (db, oldVersion, newVersion) {
-              //   db.execute(
-              //      );
-              //   db.execute('DROP TABLE todo');
-              // },
-            ));
+    var database = await openDatabase(
+      path,
+      version: 2,
+      onCreate: (db, version) => db.execute(
+        'CREATE TABLE IF NOT EXISTS $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)',
+      ),
+      onUpgrade: (db, oldVersion, newVersion) {
+        db.execute(
+            'CREATE TABLE IF NOT EXISTS $_tableName (id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)');
+        db.execute('DROP TABLE todo');
+      },
+    );
     return database;
   }
 
