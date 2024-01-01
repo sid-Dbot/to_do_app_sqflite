@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:to_do_app/Models/toDo.dart';
 
 class DBService {
+  String _tableName = '_tableName';
   Database? _database;
   Future<Database> get database async {
     if (_database != null) {
@@ -23,7 +24,7 @@ class DBService {
     var database = await openDatabase(path,
         version: 1,
         onCreate: (db, version) => db.execute(
-              'CREATE TABLE IF NOT EXISTS todos(id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)',
+              'CREATE TABLE IF NOT EXISTS $_tableName(id INTEGER PRIMARY KEY AUTO_INCREMENT,title TEXT,description TEXT,isDone BOOL)',
               // onUpgrade: (db, oldVersion, newVersion) {
               //   db.execute(
               //      );
@@ -36,7 +37,7 @@ class DBService {
   Future<List<ToDoModel>> getAllTodos() async {
     final db = await database;
 
-    final result = await db.query('todos');
+    final result = await db.query(_tableName);
 
     return result.map((json) => ToDoModel.fromJson(json)).toList();
   }
@@ -44,7 +45,7 @@ class DBService {
   Future<void> insert({required ToDo todo}) async {
     try {
       final db = await database;
-      db.insert('todos', todo.toMap());
+      db.insert(_tableName, todo.toMap());
     } catch (e) {
       print(e.toString());
     }
@@ -54,7 +55,7 @@ class DBService {
     try {
       final db = await database;
       await db.delete(
-        'todos',
+        _tableName,
         where: 'id = ?',
         whereArgs: [id],
       );
