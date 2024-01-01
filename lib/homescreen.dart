@@ -32,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<ToDoModel> myTodos = [];
 
   void getTodos() async {
-    await dbService.getAllTodos().then((value) {
+    await DatabaseRepository().getAllTodos().then((value) {
       setState(() {
         myTodos = value;
       });
