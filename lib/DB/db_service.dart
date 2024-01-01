@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:to_do_app/Models/toDo.dart';
 
 class DBService {
-  String _tableName = '_tableName';
+  String _tableName = 'Todos';
   Database? _database;
   Future<Database> get database async {
     if (_database != null) {
