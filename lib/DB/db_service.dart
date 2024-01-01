@@ -36,18 +36,18 @@ class DBService {
     return database;
   }
 
-  Future<List<ToDo>> getAllTodos() async {
+  Future<List<ToDoModel>> getAllTodos() async {
     final db = await database;
 
-    final result = await db.query('todo');
+    final result = await db.query('todos');
 
-    return result.map((json) => ToDo.fromJson(json)).toList();
+    return result.map((json) => ToDoModel.fromJson(json)).toList();
   }
 
   Future<void> insert({required ToDo todo}) async {
     try {
       final db = await database;
-      db.insert('todo', todo.toMap());
+      db.insert('todos', todo.toMap());
     } catch (e) {
       print(e.toString());
     }
@@ -57,7 +57,7 @@ class DBService {
     try {
       final db = await database;
       await db.delete(
-        'todo',
+        'todos',
         where: 'id = ?',
         whereArgs: [id],
       );
