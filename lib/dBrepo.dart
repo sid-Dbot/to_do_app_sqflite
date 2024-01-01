@@ -3,8 +3,6 @@ import 'package:path/path.dart';
 import 'package:to_do_app/Models/toDo.dart';
 
 class DatabaseRepository {
-  static final DatabaseRepository instance = DatabaseRepository._init();
-  DatabaseRepository._init();
   Database? _database;
 
   Future<Database> get database async {
@@ -43,7 +41,7 @@ create table ${AppConst.tableName} (
   }
 
   Future<List<ToDoModel>> getAllTodos() async {
-    final db = await instance.database;
+    final db = await database;
 
     final result = await db.query(AppConst.tableName);
 
@@ -61,7 +59,7 @@ create table ${AppConst.tableName} (
 
   Future<void> delete(int id) async {
     try {
-      final db = await instance.database;
+      final db = await database;
       await db.delete(
         AppConst.tableName,
         where: '${AppConst.id} = ?',
@@ -74,7 +72,7 @@ create table ${AppConst.tableName} (
 
   Future<void> update(ToDoModel todo) async {
     try {
-      final db = await instance.database;
+      final db = await database;
       db.update(
         AppConst.tableName,
         todo.toMap(),

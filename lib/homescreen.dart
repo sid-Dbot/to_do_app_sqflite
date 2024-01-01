@@ -46,7 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void delete({required ToDoModel todo, required BuildContext context}) async {
-    DatabaseRepository.instance.delete(todo.id).then((value) {
+    DatabaseRepository().delete(todo.id).then((value) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Deleted')));
     }).catchError((e) {
