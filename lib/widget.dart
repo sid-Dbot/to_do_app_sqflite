@@ -7,7 +7,7 @@ import 'package:to_do_app/Models/toDo.dart';
 import 'package:to_do_app/mySharedPrefrences.dart';
 
 class TodoWidget extends StatefulWidget {
-  final ToDo todo;
+  final ToDoModel todo;
 
   TodoWidget({
     Key? key,
@@ -28,9 +28,6 @@ class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final string =
-        DateFormat("yyyy-MM-dd HH:mm:ss").parse(widget.todo.createdAt);
-
     return InkWell(
         onTap: () {
           // Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -61,7 +58,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    DateFormat.yMMMd().format(string).toString(),
+                    "fsa",
                     style: const TextStyle(
                       // color: Colors.black54,
                       fontSize: 12,

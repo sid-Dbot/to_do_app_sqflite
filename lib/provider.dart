@@ -14,12 +14,12 @@ final themeModeProvider = StateProvider<ThemeMode>((ref) {
   return ThemeMode.light;
 });
 
-final todoProvider =
-    StateNotifierProvider<TodoProvider, List<ToDo>>((ref) => TodoProvider());
+final todoProvider = StateNotifierProvider<TodoProvider, List<ToDoModel>>(
+    (ref) => TodoProvider());
 
-class TodoProvider extends StateNotifier<List<ToDo>> {
+class TodoProvider extends StateNotifier<List<ToDoModel>> {
   TodoProvider() : super([]);
-  List<ToDo> todos = [];
+  List<ToDoModel> todos = [];
 
   void getTodos() async {
     await DBService().getAllTodos().then((value) => state = value);
