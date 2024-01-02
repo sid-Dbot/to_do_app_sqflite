@@ -147,15 +147,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           },
                           child: Text("Get Api")),
                       Container(
+                        padding: EdgeInsets.all(8),
                         width: double.infinity,
-                        height: 80,
+                        height: 90,
                         child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemCount: 7,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: ElevatedButton(
                                   onPressed: () {},
                                   child: Column(
@@ -164,9 +165,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       Text(
                                         getWeekdayString(DateTime.now()
                                             .add(Duration(days: index))
-                                            .day),
+                                            .weekday),
                                         style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             fontStyle: FontStyle.italic),
                                       ),
                                       Text(
@@ -174,7 +175,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             .add(Duration(days: index))),
                                         style: TextStyle(
                                             fontSize: 24,
-                                            fontStyle: FontStyle.italic),
+                                            fontStyle: FontStyle.italic,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   )),
