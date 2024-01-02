@@ -140,8 +140,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   child: Column(
                                     children: [
                                       Text(DateTime.now().day.toString()),
-                                      Text(DateFormat.d(DateTime.now())
-                                          .toString())
                                     ],
                                   )),
                             );
