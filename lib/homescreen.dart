@@ -123,7 +123,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           onPressed: () {
                             _getData();
                           },
-                          child: Text("Get Api"))
+                          child: Text("Get Api")),
+                      ListView.builder(
+                        itemCount: 7,
+                        itemBuilder: (context, index) {
+                          return ElevatedButton(
+                              onPressed: () {},
+                              child: Column(
+                                children: [Text(DateTime.now().day.toString())],
+                              ));
+                        },
+                      )
                     ],
                   ))
                 : Column(
