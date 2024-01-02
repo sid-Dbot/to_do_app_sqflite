@@ -42,6 +42,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   DBService dbService = DBService();
+  int _selected = 0;
 
   @override
   void initState() {
@@ -154,12 +155,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 foregroundColor:
-                                    isPressed ? Colors.white : Colors.black,
+                                    isPressed ? Colors.white : Colors.grey,
                                 backgroundColor: isPressed
                                     ? Colors.deepOrange
                                     : Colors.white),
                             onPressed: () {
-                              isPressed = !isPressed;
+                              _selected = index;
+                              _selected == index
+                                  ? isPressed = true
+                                  : isPressed = false;
                               setState(() {});
                             },
                             child: Column(
