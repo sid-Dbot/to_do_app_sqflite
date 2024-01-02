@@ -28,7 +28,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.deepOrange,
-        // scaffoldBackgroundColor: Colors.black45,
+        scaffoldBackgroundColor: Colors.grey.shade900,
         // appBarTheme: AppBarTheme(
         //     backgroundColor: Colors.black, foregroundColor: Colors.white),
       ),
