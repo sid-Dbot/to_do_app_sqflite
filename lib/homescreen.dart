@@ -136,119 +136,134 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               _getData();
               setState(() {});
             },
-            child: myTodos.isEmpty
-                ? Center(
-                    child: Column(
-                    children: [
-                      Text('You don\'t have any todos yet'),
-                      ElevatedButton(
-                          onPressed: () {
-                            _getData();
-                          },
-                          child: Text("Get Api")),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        width: double.infinity,
-                        height: 90,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 7,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(),
-                                  onPressed: () {},
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        getWeekdayString(DateTime.now()
-                                            .add(Duration(days: index))
-                                            .weekday),
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontStyle: FontStyle.italic),
-                                      ),
-                                      Text(
-                                        DateFormat.d().format(DateTime.now()
-                                            .add(Duration(days: index))),
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontStyle: FontStyle.italic,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  )),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ))
-                : Column(
-                    children: [
-                      Expanded(
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 20,
-                          ),
-                          padding: const EdgeInsets.all(16),
-                          itemBuilder: (context, index) {
-                            final todo = myTodos[index];
-                            return TodoWidget(
-                              todo:
-                                  ref.watch(todoProvider.notifier).state[index],
-                            );
-                          },
-                          itemCount:
-                              ref.watch(todoProvider.notifier).state.length,
-                        ),
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(16),
-                                      topRight: Radius.circular(16))),
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            MySharedPrefrences.setTheme(false);
-                                            // MyApp.themeNotifier.value =
-                                            //     ThemeMode.dark;
-
-                                            // context.read(themeProvider.notifier).toggleTheme();
-
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('Dark')),
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            MySharedPrefrences.setTheme(true);
-                                            // MyApp.themeNotifier.value =
-                                            //     ThemeMode.light;
-                                            // context.read(themeProvider.notifier).toggleTheme();
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('Light'))
-                                    ],
-                                  ),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(8),
+                  width: double.infinity,
+                  height: 90,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 7,
+                    itemBuilder: (context, index) {
+                      bool isPressed = false;
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: isPressed
+                                    ? Colors.deepOrange
+                                    : Colors.white),
+                            onPressed: () {
+                              isPressed = !isPressed;
+                              setState(() {});
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getWeekdayString(DateTime.now()
+                                      .add(Duration(days: index))
+                                      .weekday),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                                Text(
+                                  DateFormat.d().format(DateTime.now()
+                                      .add(Duration(days: index))),
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )),
+                      );
+                    },
+                  ),
+                ),
+                myTodos.isEmpty
+                    ? Center(
+                        child: Column(
+                        children: [
+                          Text('You don\'t have any todos yet'),
+                          ElevatedButton(
+                              onPressed: () {
+                                _getData();
+                              },
+                              child: Text("Get Api")),
+                        ],
+                      ))
+                    : Column(
+                        children: [
+                          Expanded(
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 20,
+                              ),
+                              padding: const EdgeInsets.all(16),
+                              itemBuilder: (context, index) {
+                                final todo = myTodos[index];
+                                return TodoWidget(
+                                  todo: ref
+                                      .watch(todoProvider.notifier)
+                                      .state[index],
                                 );
                               },
-                            );
-                          },
-                          child: Text('Select Theme'))
-                    ],
-                  ),
+                              itemCount:
+                                  ref.watch(todoProvider.notifier).state.length,
+                            ),
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(16),
+                                          topRight: Radius.circular(16))),
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                MySharedPrefrences.setTheme(
+                                                    false);
+                                                // MyApp.themeNotifier.value =
+                                                //     ThemeMode.dark;
+
+                                                // context.read(themeProvider.notifier).toggleTheme();
+
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Dark')),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                MySharedPrefrences.setTheme(
+                                                    true);
+                                                // MyApp.themeNotifier.value =
+                                                //     ThemeMode.light;
+                                                // context.read(themeProvider.notifier).toggleTheme();
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Light'))
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text('Select Theme'))
+                        ],
+                      ),
+              ],
+            ),
           ),
         ));
   }
