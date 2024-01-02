@@ -204,6 +204,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //         ],
                 //       ))
                 //     :
+
+                Expanded(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: 5,
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          thickness: 2,
+                          endIndent: MediaQuery.of(context).size.width - 175,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 50,
+                          // padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                  shape: CircleBorder(),
+                                  onChanged: (value) {
+                                    _done = value!;
+
+                                    setState(() {});
+                                  },
+                                  value: _done),
+                              Flexible(
+                                flex: 6,
+                                child: Text(
+                                  "titlesdfsffsdffffffffff a ff    sd   d fsaaaaaaaaasfdsafaa",
+                                  style: const TextStyle(
+                                      // color: Colors.black,
+                                      overflow: TextOverflow.ellipsis,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.delete_outline,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 Column(
                   children: [
                     // Expanded(
@@ -226,87 +288,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     //   ),
                     // ),
 
-                    Container(
-                      height: 50,
-                      // padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                              onChanged: (value) {
-                                _done = value!;
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       showModalBottomSheet(
+                    //         shape: RoundedRectangleBorder(
+                    //             borderRadius: BorderRadius.only(
+                    //                 topLeft: Radius.circular(16),
+                    //                 topRight: Radius.circular(16))),
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return Padding(
+                    //             padding: const EdgeInsets.all(8.0),
+                    //             child: Column(
+                    //               mainAxisSize: MainAxisSize.min,
+                    //               children: [
+                    //                 ElevatedButton(
+                    //                     onPressed: () {
+                    //                       MySharedPrefrences.setTheme(false);
+                    //                       // MyApp.themeNotifier.value =
+                    //                       //     ThemeMode.dark;
 
-                                setState(() {});
-                              },
-                              value: _done),
-                          Text(
-                            "titlesdfsffsdffffffffff a ff    sd   d fsaaaaaaaaasfdsafaa",
-                            style: const TextStyle(
-                                // color: Colors.black,
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    //                       // context.read(themeProvider.notifier).toggleTheme();
 
-                    ElevatedButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16),
-                                    topRight: Radius.circular(16))),
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          MySharedPrefrences.setTheme(false);
-                                          // MyApp.themeNotifier.value =
-                                          //     ThemeMode.dark;
-
-                                          // context.read(themeProvider.notifier).toggleTheme();
-
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Dark')),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          MySharedPrefrences.setTheme(true);
-                                          // MyApp.themeNotifier.value =
-                                          //     ThemeMode.light;
-                                          // context.read(themeProvider.notifier).toggleTheme();
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Light'))
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Text('Select Theme'))
+                    //                       Navigator.pop(context);
+                    //                     },
+                    //                     child: Text('Dark')),
+                    //                 ElevatedButton(
+                    //                     onPressed: () {
+                    //                       MySharedPrefrences.setTheme(true);
+                    //                       // MyApp.themeNotifier.value =
+                    //                       //     ThemeMode.light;
+                    //                       // context.read(themeProvider.notifier).toggleTheme();
+                    //                       Navigator.pop(context);
+                    //                     },
+                    //                     child: Text('Light'))
+                    //               ],
+                    //             ),
+                    //           );
+                    //         },
+                    //       );
+                    //     },
+                    //     child: Text('Select Theme'))
                   ],
                 ),
               ],
