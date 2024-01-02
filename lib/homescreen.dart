@@ -77,6 +77,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
+  bool isPressed = false;
+
   @override
   Widget build(BuildContext context) {
     getTodos();
@@ -147,7 +149,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 7,
                     itemBuilder: (context, index) {
-                      bool isPressed = false;
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: ElevatedButton(
