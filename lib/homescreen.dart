@@ -154,8 +154,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         padding: const EdgeInsets.all(4.0),
                         child: GestureDetector(
                           onTap: () {
-                            _selected = index;
-                            // setState(() {});
+                            setState(() {
+                              _selected = index;
+                            });
                           },
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
