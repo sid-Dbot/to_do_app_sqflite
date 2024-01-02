@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 import 'package:to_do_app/dBrepo.dart';
@@ -124,15 +125,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             _getData();
                           },
                           child: Text("Get Api")),
-                      ListView.builder(
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          return ElevatedButton(
-                              onPressed: () {},
-                              child: Column(
-                                children: [Text(DateTime.now().day.toString())],
-                              ));
-                        },
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 7,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Column(
+                                    children: [
+                                      Text(DateTime.now().day.toString()),
+                                      Text(DateFormat.d(DateTime.now())
+                                          .toString())
+                                    ],
+                                  )),
+                            );
+                          },
+                        ),
                       )
                     ],
                   ))
