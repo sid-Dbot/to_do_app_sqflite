@@ -153,6 +153,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         padding: const EdgeInsets.all(4.0),
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                                foregroundColor:
+                                    isPressed ? Colors.white : Colors.black,
                                 backgroundColor: isPressed
                                     ? Colors.deepOrange
                                     : Colors.white),
