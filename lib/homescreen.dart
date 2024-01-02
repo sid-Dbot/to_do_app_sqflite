@@ -158,6 +158,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             return Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(),
                                   onPressed: () {},
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
