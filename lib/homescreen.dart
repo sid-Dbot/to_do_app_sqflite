@@ -155,20 +155,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         child: GestureDetector(
                           onTap: () {
                             _selected = index;
-                            setState(() {});
+                            // setState(() {});
                           },
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  foregroundColor:
-                                      isPressed ? Colors.white : Colors.grey,
-                                  backgroundColor: isPressed
+                                  foregroundColor: _selected == index
+                                      ? Colors.white
+                                      : Colors.grey,
+                                  backgroundColor: _selected == index
                                       ? Colors.deepOrange
                                       : Colors.white),
                               onPressed: () {
-                                _selected == index
-                                    ? isPressed = true
-                                    : isPressed = false;
-                                setState(() {});
+                                // _selected == index
+                                //     ? isPressed = true
+                                //     : isPressed = false;
+                                // setState(() {});
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
