@@ -160,7 +160,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     : Colors.grey,
                                 backgroundColor: _selected == index
                                     ? Colors.deepOrange
-                                    : Colors.white),
+                                    : Theme.of(context).primaryColor),
                             onPressed: () {
                               setState(() {
                                 _selected = index;
