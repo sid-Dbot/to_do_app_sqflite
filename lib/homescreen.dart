@@ -205,22 +205,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //     :
                 Column(
                   children: [
-                    Expanded(
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 20,
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        itemBuilder: (context, index) {
-                          final todo = myTodos[index];
-                          return TodoWidget(
-                            todo: ref.watch(todoProvider.notifier).state[index],
-                          );
-                        },
-                        itemCount:
-                            ref.watch(todoProvider.notifier).state.length,
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: ListView.separated(
+                    //     separatorBuilder: (context, index) =>
+                    //         const SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //     padding: const EdgeInsets.all(16),
+                    //     itemBuilder: (context, index) {
+                    //       final todo = myTodos[index];
+                    //       return TodoWidget(
+                    //         todo: ref
+                    //             .watch(todoProvider.notifier)
+                    //             .state[index],
+                    //       );
+                    //     },
+                    //     itemCount:
+                    //         ref.watch(todoProvider.notifier).state.length,
+                    //   ),
+                    // ),
                     ElevatedButton(
                         onPressed: () {
                           showModalBottomSheet(
