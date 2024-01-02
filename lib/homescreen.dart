@@ -152,41 +152,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                foregroundColor:
-                                    isPressed ? Colors.white : Colors.grey,
-                                backgroundColor: isPressed
-                                    ? Colors.deepOrange
-                                    : Colors.white),
-                            onPressed: () {
-                              _selected = index;
-                              _selected == index
-                                  ? isPressed = true
-                                  : isPressed = false;
-                              setState(() {});
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  getWeekdayString(DateTime.now()
-                                      .add(Duration(days: index))
-                                      .weekday),
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                Text(
-                                  DateFormat.d().format(DateTime.now()
-                                      .add(Duration(days: index))),
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
+                        child: GestureDetector(
+                          onTap: () {
+                            _selected = index;
+                            setState(() {});
+                          },
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  foregroundColor:
+                                      isPressed ? Colors.white : Colors.grey,
+                                  backgroundColor: isPressed
+                                      ? Colors.deepOrange
+                                      : Colors.white),
+                              onPressed: () {
+                                _selected == index
+                                    ? isPressed = true
+                                    : isPressed = false;
+                                setState(() {});
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    getWeekdayString(DateTime.now()
+                                        .add(Duration(days: index))
+                                        .weekday),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                  Text(
+                                    DateFormat.d().format(DateTime.now()
+                                        .add(Duration(days: index))),
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ),
                       );
                     },
                   ),
