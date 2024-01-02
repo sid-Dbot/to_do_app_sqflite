@@ -26,11 +26,12 @@ class MyApp extends ConsumerWidget {
           appBarTheme: AppBarTheme(
               backgroundColor: Colors.white, foregroundColor: Colors.black)),
       darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.deepOrange,
-          // scaffoldBackgroundColor: Colors.black45,
-          appBarTheme: AppBarTheme(
-              backgroundColor: Colors.black, foregroundColor: Colors.white)),
+        brightness: Brightness.dark,
+        primarySwatch: Colors.deepOrange,
+        // scaffoldBackgroundColor: Colors.black45,
+        // appBarTheme: AppBarTheme(
+        //     backgroundColor: Colors.black, foregroundColor: Colors.white),
+      ),
       themeMode: themeMode,
       home: HomeScreen(),
     );
