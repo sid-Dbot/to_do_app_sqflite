@@ -139,7 +139,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   onPressed: () {},
                                   child: Column(
                                     children: [
-                                      Text(DateTime.now().day.toString()),
+                                      Text(
+                                        DateTime.now().weekday.toString(),
+                                        style: TextStyle(
+                                            fontSize: 24,
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                      Text(
+                                        DateFormat.d().format(DateTime.now()
+                                            .add(Duration(days: index))),
+                                        style: TextStyle(
+                                            fontSize: 24,
+                                            fontStyle: FontStyle.italic),
+                                      ),
                                     ],
                                   )),
                             );
