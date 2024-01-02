@@ -230,11 +230,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       height: 50,
                       // padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(10),
-                          color: MySharedPrefrences.light
-                              ? Colors.black12
-                              : Colors.black45),
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Row(
                         children: [
                           Checkbox(
@@ -244,18 +242,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 setState(() {});
                               },
                               value: _done),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "title",
-                                style: const TextStyle(
-                                    // color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
+                          Text(
+                            "titlesdfsffsdffffffffff a ff    sd   d fsaaaaaaaaasfdsafaa",
+                            style: const TextStyle(
+                                // color: Colors.black,
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
                           ),
                           Expanded(
                             child: Align(
