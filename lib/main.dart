@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Theme Switcher',
-      theme: ThemeData.light(),
+      theme: ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.white)),
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
       home: HomeScreen(),
