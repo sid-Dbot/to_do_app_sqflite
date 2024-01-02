@@ -21,6 +21,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Theme Switcher',
       theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
           appBarTheme: AppBarTheme(
               backgroundColor: Colors.white, foregroundColor: Colors.black)),
       darkTheme: ThemeData.dark(),
