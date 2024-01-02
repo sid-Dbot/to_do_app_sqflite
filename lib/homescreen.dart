@@ -42,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   _getData() async {
     var response = await http
         .get(Uri.parse('http://localhost:5000/weatherforecast'), headers: {});
-    print(response);
+    print(response.body);
   }
 
   void delete({required ToDoModel todo, required BuildContext context}) async {
@@ -115,7 +115,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               setState(() {});
             },
             child: myTodos.isEmpty
-                ? const Center(child: Text('You don\'t have any todos yet'))
+                ? Center(
+                    child: Column(
+                    children: [
+                      Text('You don\'t have any todos yet'),
+                      ElevatedButton(
+                          onPressed: () {
+                            _getData();
+                          },
+                          child: Text("Get Api"))
+                    ],
+                  ))
                 : Column(
                     children: [
                       Expanded(
