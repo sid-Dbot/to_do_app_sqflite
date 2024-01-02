@@ -12,6 +12,27 @@ import 'package:to_do_app/mySharedPrefrences.dart';
 import 'package:to_do_app/provider.dart';
 import 'package:to_do_app/widget.dart';
 
+String getWeekdayString(int weekday) {
+  switch (weekday) {
+    case 1:
+      return 'MON';
+    case 2:
+      return 'TUE';
+    case 3:
+      return 'WED';
+    case 4:
+      return 'THU';
+    case 5:
+      return 'FRI';
+    case 6:
+      return 'SAT';
+    case 7:
+      return 'SUN';
+    default:
+      return '';
+  }
+}
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -127,7 +148,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           child: Text("Get Api")),
                       Container(
                         width: double.infinity,
-                        height: 100,
+                        height: 80,
                         child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -138,11 +159,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               child: ElevatedButton(
                                   onPressed: () {},
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        DateTime.now().weekday.toString(),
+                                        getWeekdayString(DateTime.now()
+                                            .add(Duration(days: index))
+                                            .day),
                                         style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 18,
                                             fontStyle: FontStyle.italic),
                                       ),
                                       Text(
