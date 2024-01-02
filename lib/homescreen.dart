@@ -249,13 +249,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "fsa",
-                                style: const TextStyle(
-                                  // color: Colors.black54,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Text(
                                 "title",
                                 style: const TextStyle(
                                     // color: Colors.black,
