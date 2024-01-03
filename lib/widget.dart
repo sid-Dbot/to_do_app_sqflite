@@ -65,7 +65,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                     ),
                   ),
                   Text(
-                    widget.todo.title,
+                    ' widget.todo.title',
                     style: const TextStyle(
                         // color: Colors.black,
                         fontSize: 14,

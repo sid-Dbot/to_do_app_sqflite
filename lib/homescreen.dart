@@ -52,7 +52,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
-  List<ToDoModel> myTodos = [];
+  List<ToDoModel> myTodos = [
+    ToDoModel(
+        id: 1,
+        describtion: 'THis tis the first task to be done.',
+        isDone: false,
+        taskFor: '3/1/2024')
+  ];
 
   void getTodos() async {
     await DatabaseRepository().getAllTodos().then((value) {
@@ -100,39 +106,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             );
           },
         ),
-        appBar: AppBar(
-          title: Center(child: const Text('My todos')),
-          actions: [
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Consumer(builder: (context, ref, child) {
-                return GestureDetector(
-                  onTap: () {
-                    if (MySharedPrefrences.light) {
-                      MySharedPrefrences.setTheme(false);
-                      // ref.read(themeProvider.notifier).state = ThemeData.dark();
-                      ref.read(themeModeProvider.notifier).state =
-                          ThemeMode.dark;
-                      // MyApp.themeNotifier.value = ThemeMode.dark;
-                    } else {
-                      MySharedPrefrences.setTheme(true);
-                      // ref.read(themeProvider.notifier).state =
-                      //     ThemeData.light();
-                      ref.read(themeModeProvider.notifier).state =
-                          ThemeMode.light;
-                      // MyApp.themeNotifier.value = ThemeMode.light;
-                    }
-                  },
-                  child: Icon(
-                    MySharedPrefrences.light
-                        ? Icons.light_mode
-                        : Icons.dark_mode,
-                  ),
-                );
-              }),
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Your Tasks'),
+        //   actions: [
+        //     Padding(
+        //       padding: EdgeInsets.all(12.0),
+        //       child: Consumer(builder: (context, ref, child) {
+        //         return GestureDetector(
+        //           onTap: () {
+        //             if (MySharedPrefrences.light) {
+        //               MySharedPrefrences.setTheme(false);
+        //               // ref.read(themeProvider.notifier).state = ThemeData.dark();
+        //               ref.read(themeModeProvider.notifier).state =
+        //                   ThemeMode.dark;
+        //               // MyApp.themeNotifier.value = ThemeMode.dark;
+        //             } else {
+        //               MySharedPrefrences.setTheme(true);
+        //               // ref.read(themeProvider.notifier).state =
+        //               //     ThemeData.light();
+        //               ref.read(themeModeProvider.notifier).state =
+        //                   ThemeMode.light;
+        //               // MyApp.themeNotifier.value = ThemeMode.light;
+        //             }
+        //           },
+        //           child: Icon(
+        //             MySharedPrefrences.light
+        //                 ? Icons.light_mode
+        //                 : Icons.dark_mode,
+        //           ),
+        //         );
+        //       }),
+        //     )
+        //   ],
+        // ),
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
@@ -142,6 +148,49 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             },
             child: Column(
               children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        'Your Tasks',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.w400),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Consumer(builder: (context, ref, child) {
+                          return GestureDetector(
+                            onTap: () {
+                              if (MySharedPrefrences.light) {
+                                MySharedPrefrences.setTheme(false);
+                                // ref.read(themeProvider.notifier).state = ThemeData.dark();
+                                ref.read(themeModeProvider.notifier).state =
+                                    ThemeMode.dark;
+                                // MyApp.themeNotifier.value = ThemeMode.dark;
+                              } else {
+                                MySharedPrefrences.setTheme(true);
+                                // ref.read(themeProvider.notifier).state =
+                                //     ThemeData.light();
+                                ref.read(themeModeProvider.notifier).state =
+                                    ThemeMode.light;
+                                // MyApp.themeNotifier.value = ThemeMode.light;
+                              }
+                            },
+                            child: Icon(
+                              MySharedPrefrences.light
+                                  ? Icons.light_mode
+                                  : Icons.dark_mode,
+                            ),
+                          );
+                        }),
+                      )
+                    ],
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.all(8),
                   width: double.infinity,
@@ -211,7 +260,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemCount: 5,
+                      itemCount: 1,
                       separatorBuilder: (context, index) {
                         return Divider(
                           thickness: 2,
@@ -244,7 +293,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       // color: Colors.black,
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ),
                               Expanded(

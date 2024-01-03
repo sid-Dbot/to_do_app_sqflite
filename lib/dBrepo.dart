@@ -34,7 +34,6 @@ create table ${AppConst.tableName} (
     await db.execute('''
 create table ${AppConst.tableName} ( 
   ${AppConst.id} integer primary key autoincrement, 
-  ${AppConst.title} text not null,
    ${AppConst.describtion} text not null,
   ${AppConst.isDone} boolean not null)
 ''');
