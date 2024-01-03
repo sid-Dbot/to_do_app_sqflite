@@ -24,7 +24,7 @@ class DatabaseRepository {
     await db.execute('''
 create table ${AppConst.tableName} ( 
   ${AppConst.id} integer primary key autoincrement, 
-  ${AppConst.title} text not null,
+  title text not null,
    ${AppConst.describtion} text not null,
   ${AppConst.isDone} boolean not null)
 ''');
@@ -34,6 +34,7 @@ create table ${AppConst.tableName} (
     await db.execute('''
 create table ${AppConst.tableName} ( 
   ${AppConst.id} integer primary key autoincrement, 
+  ${AppConst.taskFor} text not null,
    ${AppConst.describtion} text not null,
   ${AppConst.isDone} boolean not null)
 ''');
@@ -87,7 +88,7 @@ create table ${AppConst.tableName} (
 class AppConst {
   static const String isDone = 'isDone';
   static const String id = 'id';
-  static const String title = 'title';
+  static const String taskFor = 'taskFor';
   static const String describtion = 'describtion';
   static const String tableName = 'todoTable1';
 }
