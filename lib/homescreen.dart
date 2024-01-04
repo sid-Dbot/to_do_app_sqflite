@@ -46,7 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void initState() {
-    getTodos();
+    // getTodos();
     ref.read(todoProvider.notifier).getTodos();
 
     super.initState();
@@ -55,22 +55,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<ToDoModel> myTodos = [
     ToDoModel(
         id: 1,
-        describtion: 'THis tis the first task to be done.',
+        describtion: 'THis is the first task to be done.',
         isDone: false,
         taskFor: '3/1/2024')
   ];
 
-  void getTodos() async {
-    await DatabaseRepository().getAllTodos().then((value) {
-      setState(() {
-        myTodos = value;
-      });
-    });
-  }
+  // void getTodos() async {
+  //   await DatabaseRepository().getAllTodos().then((value) {
+  //     setState(() {
+  //       myTodos = value;
+  //     });
+  //   });
+  // }
 
   _getData() async {
     var response = await http
-        .get(Uri.parse('http://localhost:5000/weatherforecast'), headers: {});
+        .get(Uri.parse('http://10.0.2.2:5000/weatherforecast'), headers: {});
     print(response.body);
   }
 
@@ -89,7 +89,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getTodos();
+    // getTodos();
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -142,7 +142,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
-              getTodos();
+              // getTodos();
               _getData();
               setState(() {});
             },
@@ -268,48 +268,58 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         );
                       },
                       itemBuilder: (context, index) {
-                        return Container(
-                          height: 50,
-                          // padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                  shape: CircleBorder(),
-                                  onChanged: (value) {
-                                    _done = value!;
-
-                                    setState(() {});
-                                  },
-                                  value: _done),
-                              Flexible(
-                                flex: 6,
-                                child: Text(
-                                  "titlesdfsffsdffffffffff a ff    sd   d fsaaaaaaaaasfdsafaa",
-                                  style: const TextStyle(
-                                      // color: Colors.black,
-                                      overflow: TextOverflow.ellipsis,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                        return Stack(
+                          children: [
+                            Container(
+                              height: 50,
+                              // padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.transparent),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.delete_outline,
-                                      color: Colors.red,
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                      shape: CircleBorder(),
+                                      onChanged: (value) {
+                                        _done = value!;
+
+                                        setState(() {});
+                                      },
+                                      value: _done),
+                                  Flexible(
+                                    flex: 6,
+                                    child: Text(
+                                      myTodos[index].describtion,
+                                      style: const TextStyle(
+                                          // color: Colors.black,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                   ),
-                                ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.delete_outline,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            Positioned(
+                              top: 15,
+                              child: Divider(
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
                         );
                       },
                     ),

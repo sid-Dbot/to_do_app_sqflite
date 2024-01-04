@@ -27,7 +27,7 @@ class _AddTodoState extends State<AddTodo> {
     if (widget.todo != null) {
       if (mounted) {
         setState(() {
-          titleController.text = widget.todo!.title;
+          titleController.text = widget.todo!.taskFor;
         });
       }
     }
@@ -43,7 +43,7 @@ class _AddTodoState extends State<AddTodo> {
   void addTodo() async {
     ToDo dog = ToDo(
         id: DateTime.now().microsecondsSinceEpoch,
-        title: titleController.text,
+        taskFor: titleController.text,
         createdAt: DateTime.now().toString());
 
     await dbService.insert(todo: dog);

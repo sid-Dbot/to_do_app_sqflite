@@ -17,7 +17,7 @@ class DatabaseRepository {
     final path = join(dbPath, filePath);
 
     return await openDatabase(path,
-        version: 3, onCreate: _createDB, onUpgrade: _updateDB);
+        version: 2, onCreate: _createDB, onUpgrade: _updateDB);
   }
 
   Future _createDB(Database db, int version) async {
