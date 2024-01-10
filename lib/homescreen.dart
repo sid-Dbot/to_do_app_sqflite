@@ -196,48 +196,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   padding: EdgeInsets.all(8),
                   width: double.infinity,
                   height: 90,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: _selected == index
-                                  ? Colors.white
-                                  : Colors.grey,
-                              backgroundColor: _selected == index
-                                  ? Colors.deepOrange
-                                  : Theme.of(context).primaryColor,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _selected = index;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  getWeekdayString(DateTime.now()
-                                      .add(Duration(days: index))
-                                      .weekday),
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontStyle: FontStyle.italic),
+                  child: Consumer(
+                    builder: (_, WidgetRef ref, __) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 7,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: _selected == index
+                                      ? Colors.white
+                                      : Colors.grey,
+                                  backgroundColor: _selected == index
+                                      ? Colors.deepOrange
+                                      : Theme.of(context).primaryColor,
                                 ),
-                                Text(
-                                  DateFormat.d().format(DateTime.now()
-                                      .add(Duration(days: index))),
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
+                                onPressed: () {
+                                  setState(() {
+                                    _selected = index;
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      getWeekdayString(DateTime.now()
+                                          .add(Duration(days: index))
+                                          .weekday),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Text(
+                                      DateFormat.d().format(DateTime.now()
+                                          .add(Duration(days: index))),
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )),
+                          );
+                        },
                       );
                     },
                   ),
