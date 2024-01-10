@@ -20,13 +20,18 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.white,
-          primarySwatch: Colors.deepOrange,
-          appBarTheme: AppBarTheme(
-              backgroundColor: Colors.white, foregroundColor: Colors.black)),
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
+        primarySwatch: Colors.deepOrange,
+        // appBarTheme: AppBarTheme(
+        //     backgroundColor: Colors.white, foregroundColor: Colors.black),
+      ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        // checkboxTheme: CheckboxThemeData(
+        //     splashRadius: 10,
+        //     fillColor: MaterialStateProperty.resolveWith(
+        //         (states) => Colors.deepOrange)),
         primarySwatch: Colors.deepOrange,
         scaffoldBackgroundColor: Colors.grey.shade900,
         // appBarTheme: AppBarTheme(
