@@ -167,14 +167,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             onTap: () {
                               if (MySharedPrefrences.light) {
                                 MySharedPrefrences.setTheme(false);
-                                // ref.read(themeProvider.notifier).state = ThemeData.dark();
+                                ref.read(themeProvider.notifier).state =
+                                    ThemeData.dark();
                                 ref.read(themeModeProvider.notifier).state =
                                     ThemeMode.dark;
                                 // MyApp.themeNotifier.value = ThemeMode.dark;
                               } else {
                                 MySharedPrefrences.setTheme(true);
-                                // ref.read(themeProvider.notifier).state =
-                                //     ThemeData.light();
+                                ref.read(themeProvider.notifier).state =
+                                    ThemeData.light();
                                 ref.read(themeModeProvider.notifier).state =
                                     ThemeMode.light;
                                 // MyApp.themeNotifier.value = ThemeMode.light;
@@ -204,12 +205,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         padding: const EdgeInsets.all(4.0),
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                foregroundColor: _selected == index
-                                    ? Colors.white
-                                    : Colors.grey,
-                                backgroundColor: _selected == index
-                                    ? Colors.deepOrange
-                                    : Theme.of(context).primaryColor),
+                              foregroundColor: _selected == index
+                                  ? Colors.white
+                                  : Colors.grey,
+                              backgroundColor: _selected == index
+                                  ? Colors.deepOrange
+                                  : Theme.of(context).primaryColor,
+                            ),
                             onPressed: () {
                               setState(() {
                                 _selected = index;
