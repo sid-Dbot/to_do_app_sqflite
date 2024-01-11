@@ -503,7 +503,7 @@ Widget _buildAnimatedContainer(int index, BuildContext context, int _selected) {
               : Theme.of(context).primaryColor,
         ),
         onPressed: () {
-          ref.read(SelectedDayProvider.notifier).state = index;
+          // ref.read(SelectedDayProvider.notifier).state = index;
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
