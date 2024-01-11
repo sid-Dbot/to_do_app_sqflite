@@ -40,9 +40,10 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
+// int _selected = 0;
+
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   DBService dbService = DBService();
-  int _selected = 0;
 
   @override
   void initState() {
@@ -53,6 +54,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   List<ToDoModel> myTodos = [
+    ToDoModel(
+        id: 1,
+        describtion: 'THis is the first task to be done.',
+        isDone: false,
+        taskFor: '3/1/2024'),
     ToDoModel(
         id: 1,
         describtion: 'THis is the first task to be done.',
@@ -151,101 +157,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'Your Tasks',
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.w400),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Consumer(builder: (context, ref, child) {
-                          return GestureDetector(
-                            onTap: () {
-                              if (MySharedPrefrences.light) {
-                                MySharedPrefrences.setTheme(false);
-                                ref.read(themeProvider.notifier).state =
-                                    ThemeData.dark();
-                                ref.read(themeModeProvider.notifier).state =
-                                    ThemeMode.dark;
-                                // MyApp.themeNotifier.value = ThemeMode.dark;
-                              } else {
-                                MySharedPrefrences.setTheme(true);
-                                ref.read(themeProvider.notifier).state =
-                                    ThemeData.light();
-                                ref.read(themeModeProvider.notifier).state =
-                                    ThemeMode.light;
-                                // MyApp.themeNotifier.value = ThemeMode.light;
-                              }
-                            },
-                            child: Icon(
-                              MySharedPrefrences.light
-                                  ? Icons.light_mode
-                                  : Icons.dark_mode,
-                            ),
-                          );
-                        }),
-                      )
-                    ],
-                  ),
+                  child: ScreenTitle(),
                 ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  width: double.infinity,
-                  height: 90,
-                  child: Consumer(
-                    builder: (_, WidgetRef ref, __) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: _selected == index
-                                      ? Colors.white
-                                      : Colors.grey,
-                                  backgroundColor: _selected == index
-                                      ? Colors.deepOrange
-                                      : Theme.of(context).primaryColor,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _selected = index;
-                                  });
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      getWeekdayString(DateTime.now()
-                                          .add(Duration(days: index))
-                                          .weekday),
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic),
-                                    ),
-                                    Text(
-                                      DateFormat.d().format(DateTime.now()
-                                          .add(Duration(days: index))),
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontStyle: FontStyle.italic,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                )),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                DayList(),
+                SizedBox(
+                  height: 5,
                 ),
+
                 // myTodos.isEmpty
                 //     ? Center(
                 //         child: Column(
@@ -260,13 +178,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 //       ))
                 //     :
 
-                Expanded(
+                Flexible(
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: ListView.separated(
                       shrinkWrap: true,
-                      itemCount: 1,
+                      itemCount: 2,
                       separatorBuilder: (context, index) {
                         return Divider(
                           thickness: 2,
@@ -311,7 +229,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.delete_outline,
-                                          color: Colors.red,
+                                          color: Colors.red.shade600,
                                         ),
                                       ),
                                     ),
@@ -400,5 +318,138 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ));
+  }
+}
+
+class DayList extends ConsumerWidget {
+  @override
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    int _selected = ref.watch(SelectedDayProvider);
+    return Container(
+      padding: EdgeInsets.all(4),
+      width: double.infinity,
+      height: 100,
+      child: TweenAnimationBuilder(
+          duration: Duration(seconds: 1),
+          child: ListView.separated(
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                width: 10,
+              );
+            },
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: 7,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 75,
+                width: 75,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor:
+                          _selected == index ? Colors.white : Colors.grey,
+                      backgroundColor: _selected == index
+                          ? Colors.deepOrange
+                          : Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () {
+                      ref.read(SelectedDayProvider.notifier).state = index;
+                      // _selected = index;
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          getWeekdayString(DateTime.now()
+                              .add(Duration(days: index))
+                              .weekday),
+                          style: TextStyle(
+                              fontSize: 16, fontStyle: FontStyle.italic),
+                        ),
+                        Text(
+                          DateFormat.d().format(
+                              DateTime.now().add(Duration(days: index))),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )),
+              );
+            },
+          ),
+          tween: Tween<double>(begin: 0, end: 1),
+          builder: (context, tween, child) {
+            return Opacity(
+              opacity: tween,
+              child: Padding(
+                padding: EdgeInsets.only(top: tween * 10),
+                child: child,
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class ScreenTitle extends StatelessWidget {
+  const ScreenTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+        duration: Duration(milliseconds: 700),
+        tween: Tween<double>(begin: 0, end: 1),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              'Your Tasks',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
+            ),
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Consumer(builder: (context, ref, child) {
+                return GestureDetector(
+                  onTap: () {
+                    if (MySharedPrefrences.light) {
+                      MySharedPrefrences.setTheme(false);
+                      ref.read(themeProvider.notifier).state = ThemeData.dark();
+                      ref.read(themeModeProvider.notifier).state =
+                          ThemeMode.dark;
+                      // MyApp.themeNotifier.value = ThemeMode.dark;
+                    } else {
+                      MySharedPrefrences.setTheme(true);
+                      ref.read(themeProvider.notifier).state =
+                          ThemeData.light();
+                      ref.read(themeModeProvider.notifier).state =
+                          ThemeMode.light;
+                      // MyApp.themeNotifier.value = ThemeMode.light;
+                    }
+                  },
+                  child: Icon(
+                    MySharedPrefrences.light
+                        ? Icons.light_mode
+                        : Icons.dark_mode,
+                  ),
+                );
+              }),
+            )
+          ],
+        ),
+        builder: (context, tween, child) {
+          return Opacity(
+            opacity: tween,
+            child: Padding(
+              padding: EdgeInsets.only(top: tween * 5),
+              child: child,
+            ),
+          );
+        });
   }
 }

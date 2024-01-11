@@ -14,6 +14,10 @@ final themeModeProvider = StateProvider<ThemeMode>((ref) {
   return ThemeMode.light;
 });
 
+final SelectedDayProvider = StateProvider<int>((ref) {
+  return 0;
+});
+
 final todoProvider = StateNotifierProvider<TodoProvider, List<ToDoModel>>(
     (ref) => TodoProvider());
 
