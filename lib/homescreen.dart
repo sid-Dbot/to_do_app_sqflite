@@ -157,7 +157,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 50, child: Center(child: ScreenTitle())),
-                  DayList(),
+                  SizedBox(height: 120, child: DayList()),
                   SizedBox(
                     height: 5,
                   ),
