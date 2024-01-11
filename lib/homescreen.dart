@@ -155,8 +155,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child:
                       SizedBox(height: 50, child: Center(child: ScreenTitle())),
                 ),
