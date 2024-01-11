@@ -152,169 +152,168 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               _getData();
               setState(() {});
             },
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child:
-                      SizedBox(height: 50, child: Center(child: ScreenTitle())),
-                ),
-                DayList(),
-                SizedBox(
-                  height: 5,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                children: [
+                  SizedBox(height: 50, child: Center(child: ScreenTitle())),
+                  DayList(),
+                  SizedBox(
+                    height: 5,
+                  ),
 
-                // myTodos.isEmpty
-                //     ? Center(
-                //         child: Column(
-                //         children: [
-                //           Text('You don\'t have any todos yet'),
-                //           ElevatedButton(
-                //               onPressed: () {
-                //                 _getData();
-                //               },
-                //               child: Text("Get Api")),
-                //         ],
-                //       ))
-                //     :
+                  // myTodos.isEmpty
+                  //     ? Center(
+                  //         child: Column(
+                  //         children: [
+                  //           Text('You don\'t have any todos yet'),
+                  //           ElevatedButton(
+                  //               onPressed: () {
+                  //                 _getData();
+                  //               },
+                  //               child: Text("Get Api")),
+                  //         ],
+                  //       ))
+                  //     :
 
-                Flexible(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: 2,
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          thickness: 2,
-                          endIndent: MediaQuery.of(context).size.width - 175,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return Stack(
-                          children: [
-                            Container(
-                              height: 50,
-                              // padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.transparent),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      shape: CircleBorder(),
-                                      onChanged: (value) {
-                                        _done = value!;
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: 2,
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            thickness: 2,
+                            endIndent: MediaQuery.of(context).size.width - 175,
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              Container(
+                                height: 50,
+                                // padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                        shape: CircleBorder(),
+                                        onChanged: (value) {
+                                          _done = value!;
 
-                                        setState(() {});
-                                      },
-                                      value: _done),
-                                  Flexible(
-                                    flex: 6,
-                                    child: Text(
-                                      myTodos[index].describtion,
-                                      style: const TextStyle(
-                                          // color: Colors.black,
-                                          overflow: TextOverflow.ellipsis,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
+                                          setState(() {});
+                                        },
+                                        value: _done),
+                                    Flexible(
+                                      flex: 6,
+                                      child: Text(
+                                        myTodos[index].describtion,
+                                        style: const TextStyle(
+                                            // color: Colors.black,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.delete_outline,
-                                          color: Colors.red.shade600,
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: Colors.red.shade600,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 15,
-                              child: Divider(
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
-                        );
-                      },
+                              Positioned(
+                                top: 15,
+                                child: Divider(
+                                  color: Colors.black,
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Column(
-                  children: [
-                    // Expanded(
-                    //   child: ListView.separated(
-                    //     separatorBuilder: (context, index) =>
-                    //         const SizedBox(
-                    //       height: 20,
-                    //     ),
-                    //     padding: const EdgeInsets.all(16),
-                    //     itemBuilder: (context, index) {
-                    //       final todo = myTodos[index];
-                    //       return TodoWidget(
-                    //         todo: ref
-                    //             .watch(todoProvider.notifier)
-                    //             .state[index],
-                    //       );
-                    //     },
-                    //     itemCount:
-                    //         ref.watch(todoProvider.notifier).state.length,
-                    //   ),
-                    // ),
+                  Column(
+                    children: [
+                      // Expanded(
+                      //   child: ListView.separated(
+                      //     separatorBuilder: (context, index) =>
+                      //         const SizedBox(
+                      //       height: 20,
+                      //     ),
+                      //     padding: const EdgeInsets.all(16),
+                      //     itemBuilder: (context, index) {
+                      //       final todo = myTodos[index];
+                      //       return TodoWidget(
+                      //         todo: ref
+                      //             .watch(todoProvider.notifier)
+                      //             .state[index],
+                      //       );
+                      //     },
+                      //     itemCount:
+                      //         ref.watch(todoProvider.notifier).state.length,
+                      //   ),
+                      // ),
 
-                    // ElevatedButton(
-                    //     onPressed: () {
-                    //       showModalBottomSheet(
-                    //         shape: RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.only(
-                    //                 topLeft: Radius.circular(16),
-                    //                 topRight: Radius.circular(16))),
-                    //         context: context,
-                    //         builder: (context) {
-                    //           return Padding(
-                    //             padding: const EdgeInsets.all(8.0),
-                    //             child: Column(
-                    //               mainAxisSize: MainAxisSize.min,
-                    //               children: [
-                    //                 ElevatedButton(
-                    //                     onPressed: () {
-                    //                       MySharedPrefrences.setTheme(false);
-                    //                       // MyApp.themeNotifier.value =
-                    //                       //     ThemeMode.dark;
+                      // ElevatedButton(
+                      //     onPressed: () {
+                      //       showModalBottomSheet(
+                      //         shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.only(
+                      //                 topLeft: Radius.circular(16),
+                      //                 topRight: Radius.circular(16))),
+                      //         context: context,
+                      //         builder: (context) {
+                      //           return Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: Column(
+                      //               mainAxisSize: MainAxisSize.min,
+                      //               children: [
+                      //                 ElevatedButton(
+                      //                     onPressed: () {
+                      //                       MySharedPrefrences.setTheme(false);
+                      //                       // MyApp.themeNotifier.value =
+                      //                       //     ThemeMode.dark;
 
-                    //                       // context.read(themeProvider.notifier).toggleTheme();
+                      //                       // context.read(themeProvider.notifier).toggleTheme();
 
-                    //                       Navigator.pop(context);
-                    //                     },
-                    //                     child: Text('Dark')),
-                    //                 ElevatedButton(
-                    //                     onPressed: () {
-                    //                       MySharedPrefrences.setTheme(true);
-                    //                       // MyApp.themeNotifier.value =
-                    //                       //     ThemeMode.light;
-                    //                       // context.read(themeProvider.notifier).toggleTheme();
-                    //                       Navigator.pop(context);
-                    //                     },
-                    //                     child: Text('Light'))
-                    //               ],
-                    //             ),
-                    //           );
-                    //         },
-                    //       );
-                    //     },
-                    //     child: Text('Select Theme'))
-                  ],
-                ),
-              ],
+                      //                       Navigator.pop(context);
+                      //                     },
+                      //                     child: Text('Dark')),
+                      //                 ElevatedButton(
+                      //                     onPressed: () {
+                      //                       MySharedPrefrences.setTheme(true);
+                      //                       // MyApp.themeNotifier.value =
+                      //                       //     ThemeMode.light;
+                      //                       // context.read(themeProvider.notifier).toggleTheme();
+                      //                       Navigator.pop(context);
+                      //                     },
+                      //                     child: Text('Light'))
+                      //               ],
+                      //             ),
+                      //           );
+                      //         },
+                      //       );
+                      //     },
+                      //     child: Text('Select Theme'))
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ));
@@ -412,34 +411,27 @@ class ScreenTitle extends StatelessWidget {
               'Your Tasks',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
             ),
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Consumer(builder: (context, ref, child) {
-                return GestureDetector(
-                  onTap: () {
-                    if (MySharedPrefrences.light) {
-                      MySharedPrefrences.setTheme(false);
-                      ref.read(themeProvider.notifier).state = ThemeData.dark();
-                      ref.read(themeModeProvider.notifier).state =
-                          ThemeMode.dark;
-                      // MyApp.themeNotifier.value = ThemeMode.dark;
-                    } else {
-                      MySharedPrefrences.setTheme(true);
-                      ref.read(themeProvider.notifier).state =
-                          ThemeData.light();
-                      ref.read(themeModeProvider.notifier).state =
-                          ThemeMode.light;
-                      // MyApp.themeNotifier.value = ThemeMode.light;
-                    }
-                  },
-                  child: Icon(
-                    MySharedPrefrences.light
-                        ? Icons.light_mode
-                        : Icons.dark_mode,
-                  ),
-                );
-              }),
-            )
+            Consumer(builder: (context, ref, child) {
+              return GestureDetector(
+                onTap: () {
+                  if (MySharedPrefrences.light) {
+                    MySharedPrefrences.setTheme(false);
+                    ref.read(themeProvider.notifier).state = ThemeData.dark();
+                    ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
+                    // MyApp.themeNotifier.value = ThemeMode.dark;
+                  } else {
+                    MySharedPrefrences.setTheme(true);
+                    ref.read(themeProvider.notifier).state = ThemeData.light();
+                    ref.read(themeModeProvider.notifier).state =
+                        ThemeMode.light;
+                    // MyApp.themeNotifier.value = ThemeMode.light;
+                  }
+                },
+                child: Icon(
+                  MySharedPrefrences.light ? Icons.light_mode : Icons.dark_mode,
+                ),
+              );
+            })
           ],
         ),
         builder: (context, tween, child) {
