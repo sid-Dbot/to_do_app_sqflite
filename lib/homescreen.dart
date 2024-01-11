@@ -326,10 +326,10 @@ class DayList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int _selected = ref.watch(SelectedDayProvider);
     return Container(
-      padding: EdgeInsets.all(4),
-      width: double.infinity,
-      height: 100,
-      child: TweenAnimationBuilder(
+        padding: EdgeInsets.all(4),
+        width: double.infinity,
+        height: 100,
+        child: TweenAnimationBuilder<double>(
           duration: Duration(seconds: 1),
           child: ListView.separated(
             separatorBuilder: (context, index) {
@@ -341,51 +341,7 @@ class DayList extends ConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 7,
             itemBuilder: (context, index) {
-              return TweenAnimationBuilder(
-                  duration: Duration(milliseconds: 500),
-                  child: Container(
-                    height: 75,
-                    width: 75,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor:
-                              _selected == index ? Colors.white : Colors.grey,
-                          backgroundColor: _selected == index
-                              ? Colors.deepOrange
-                              : Theme.of(context).primaryColor,
-                        ),
-                        onPressed: () {
-                          ref.read(SelectedDayProvider.notifier).state = index;
-                          // _selected = index;
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              getWeekdayString(DateTime.now()
-                                  .add(Duration(days: index))
-                                  .weekday),
-                              style: TextStyle(
-                                  fontSize: 16, fontStyle: FontStyle.italic),
-                            ),
-                            Text(
-                              DateFormat.d().format(
-                                  DateTime.now().add(Duration(days: index))),
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        )),
-                  ),
-                  tween: Tween<double>(begin: 0, end: 1),
-                  builder: (context, tween, child) {
-                    return Opacity(
-                      opacity: tween,
-                      child: child,
-                    );
-                  });
+              return _buildAnimatedContainer(index, context, _selected);
             },
           ),
           tween: Tween<double>(begin: 0, end: 1),
@@ -397,8 +353,79 @@ class DayList extends ConsumerWidget {
                 child: child,
               ),
             );
-          }),
-    );
+          },
+        )
+
+        // TweenAnimationBuilder(
+        //     duration: Duration(seconds: 1),
+        //     child: ListView.separated(
+        //       separatorBuilder: (context, index) {
+        //         return SizedBox(
+        //           width: 10,
+        //         );
+        //       },
+        //       shrinkWrap: true,
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: 7,
+        //       itemBuilder: (context, index) {
+        //         return TweenAnimationBuilder(
+        //             duration: Duration(milliseconds: 500),
+        //             child: Container(
+        //               height: 75,
+        //               width: 75,
+        //               child: ElevatedButton(
+        //                   style: ElevatedButton.styleFrom(
+        //                     foregroundColor:
+        //                         _selected == index ? Colors.white : Colors.grey,
+        //                     backgroundColor: _selected == index
+        //                         ? Colors.deepOrange
+        //                         : Theme.of(context).primaryColor,
+        //                   ),
+        //                   onPressed: () {
+        //                     ref.read(SelectedDayProvider.notifier).state = index;
+        //                     // _selected = index;
+        //                   },
+        //                   child: Column(
+        //                     mainAxisAlignment: MainAxisAlignment.center,
+        //                     children: [
+        //                       Text(
+        //                         getWeekdayString(DateTime.now()
+        //                             .add(Duration(days: index))
+        //                             .weekday),
+        //                         style: TextStyle(
+        //                             fontSize: 16, fontStyle: FontStyle.italic),
+        //                       ),
+        //                       Text(
+        //                         DateFormat.d().format(
+        //                             DateTime.now().add(Duration(days: index))),
+        //                         style: TextStyle(
+        //                             fontSize: 24,
+        //                             fontStyle: FontStyle.italic,
+        //                             fontWeight: FontWeight.bold),
+        //                       ),
+        //                     ],
+        //                   )),
+        //             ),
+        //             tween: Tween<double>(begin: 0, end: 1),
+        //             builder: (context, tween, child) {
+        //               return Opacity(
+        //                 opacity: tween,
+        //                 child: child,
+        //               );
+        //             });
+        //   },
+        // ),
+        // tween: Tween<double>(begin: 0, end: 1),
+        // builder: (context, tween, child) {
+        //   return Opacity(
+        //     opacity: tween,
+        //     child: Padding(
+        //       padding: EdgeInsets.only(top: tween * 10),
+        //       child: child,
+        //     ),
+        //   );
+        // }),
+        );
   }
 }
 
@@ -453,4 +480,59 @@ class ScreenTitle extends StatelessWidget {
           );
         });
   }
+}
+
+Widget _buildAnimatedContainer(int index, BuildContext context, int _selected) {
+  return TweenAnimationBuilder<double>(
+    duration: Duration(milliseconds: 500),
+    tween: Tween<double>(begin: 0, end: 1),
+    builder: (context, value, child) {
+      return Opacity(
+        opacity: value,
+        child: child,
+      );
+    },
+    child: Container(
+      height: 75,
+      width: 75,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: _selected == index ? Colors.white : Colors.grey,
+          backgroundColor: _selected == index
+              ? Colors.deepOrange
+              : Theme.of(context).primaryColor,
+        ),
+        onPressed: () {
+          ref.read(SelectedDayProvider.notifier).state = index;
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              getWeekdayString(
+                DateTime.now()
+                    .add(
+                      Duration(days: index),
+                    )
+                    .weekday,
+              ),
+              style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+            ),
+            Text(
+              DateFormat.d().format(
+                DateTime.now().add(
+                  Duration(days: index),
+                ),
+              ),
+              style: TextStyle(
+                fontSize: 24,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
