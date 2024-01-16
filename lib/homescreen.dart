@@ -343,42 +343,47 @@ class DayList extends ConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 7,
             itemBuilder: (context, index) {
-              return Container(
-                height: 75,
-                width: 75,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                          _selected == index ? Colors.white : Colors.grey,
-                      backgroundColor: _selected == index
-                          ? Colors.deepOrange
-                          : Theme.of(context).primaryColor,
-                    ),
-                    onPressed: () {
-                      ref.read(SelectedDayProvider.notifier).state = index;
-                      // _selected = index;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          getWeekdayString(DateTime.now()
-                              .add(Duration(days: index))
-                              .weekday),
-                          style: TextStyle(
-                              fontSize: 16, fontStyle: FontStyle.italic),
-                        ),
-                        Text(
-                          DateFormat.d().format(
-                              DateTime.now().add(Duration(days: index))),
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    )),
-              );
+              return FutureBuilder(
+                  future: Future.delayed(Duration(milliseconds: index * 100)),
+                  builder: (context, snapsht) {
+                    return Container(
+                      height: 75,
+                      width: 75,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor:
+                                _selected == index ? Colors.white : Colors.grey,
+                            backgroundColor: _selected == index
+                                ? Colors.deepOrange
+                                : Theme.of(context).primaryColor,
+                          ),
+                          onPressed: () {
+                            ref.read(SelectedDayProvider.notifier).state =
+                                index;
+                            // _selected = index;
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                getWeekdayString(DateTime.now()
+                                    .add(Duration(days: index))
+                                    .weekday),
+                                style: TextStyle(
+                                    fontSize: 16, fontStyle: FontStyle.italic),
+                              ),
+                              Text(
+                                DateFormat.d().format(
+                                    DateTime.now().add(Duration(days: index))),
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          )),
+                    );
+                  });
             },
           ),
           tween: Tween<double>(begin: 0, end: 1),
