@@ -343,7 +343,7 @@ class DayList extends ConsumerWidget {
         itemBuilder: (context, index) {
           return FutureBuilder(
               future: Future.delayed(
-                  Duration(milliseconds: index * 100), () => true),
+                  Duration(milliseconds: index * 300), () => true),
               builder: (context, snapsht) {
                 return snapsht.connectionState == ConnectionState.done
                     ? TweenAnimationBuilder(
@@ -387,7 +387,7 @@ class DayList extends ConsumerWidget {
                                 ],
                               )),
                         ),
-                        tween: Tween<double>(begin: 0, end: 1),
+                        tween: Tween<double>(begin: 1, end: .5),
                         builder: (context, tween, child) {
                           return Transform.translate(
                             offset: Offset(0, 20 * sin(2 * pi * tween)),
