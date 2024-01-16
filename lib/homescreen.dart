@@ -331,19 +331,19 @@ class DayList extends ConsumerWidget {
       padding: EdgeInsets.all(4),
       width: double.infinity,
       height: 100,
-      child: TweenAnimationBuilder(
-          duration: Duration(seconds: 1),
-          child: ListView.separated(
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                width: 10,
-              );
-            },
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: 7,
-            itemBuilder: (context, index) {
-              return FutureBuilder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            width: 10,
+          );
+        },
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 7,
+        itemBuilder: (context, index) {
+          return TweenAnimationBuilder(
+              duration: Duration(seconds: 1),
+              child: FutureBuilder(
                   future: Future.delayed(Duration(seconds: index), () => true),
                   builder: (context, snapsht) {
                     return snapsht.connectionState == ConnectionState.done
@@ -387,16 +387,16 @@ class DayList extends ConsumerWidget {
                                 )),
                           )
                         : Container();
-                  });
-            },
-          ),
-          tween: Tween<double>(begin: 0, end: 1),
-          builder: (context, tween, child) {
-            return Transform.translate(
-              offset: Offset(0, 20 * sin(2 * pi * tween)),
-              child: child,
-            );
-          }),
+                  }),
+              tween: Tween<double>(begin: 0, end: 1),
+              builder: (context, tween, child) {
+                return Transform.translate(
+                  offset: Offset(0, 20 * sin(2 * pi * tween)),
+                  child: child,
+                );
+              });
+        },
+      ),
     );
   }
 }
