@@ -344,45 +344,49 @@ class DayList extends ConsumerWidget {
             itemCount: 7,
             itemBuilder: (context, index) {
               return FutureBuilder(
-                  future: Future.delayed(Duration(seconds: index)),
+                  future: Future.delayed(Duration(seconds: index), () => true),
                   builder: (context, snapsht) {
-                    return Container(
-                      height: 75,
-                      width: 75,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor:
-                                _selected == index ? Colors.white : Colors.grey,
-                            backgroundColor: _selected == index
-                                ? Colors.deepOrange
-                                : Theme.of(context).primaryColor,
-                          ),
-                          onPressed: () {
-                            ref.read(SelectedDayProvider.notifier).state =
-                                index;
-                            // _selected = index;
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                getWeekdayString(DateTime.now()
-                                    .add(Duration(days: index))
-                                    .weekday),
-                                style: TextStyle(
-                                    fontSize: 16, fontStyle: FontStyle.italic),
-                              ),
-                              Text(
-                                DateFormat.d().format(
-                                    DateTime.now().add(Duration(days: index))),
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          )),
-                    );
+                    return snapsht.connectionState == ConnectionState.done
+                        ? Container(
+                            height: 75,
+                            width: 75,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: _selected == index
+                                      ? Colors.white
+                                      : Colors.grey,
+                                  backgroundColor: _selected == index
+                                      ? Colors.deepOrange
+                                      : Theme.of(context).primaryColor,
+                                ),
+                                onPressed: () {
+                                  ref.read(SelectedDayProvider.notifier).state =
+                                      index;
+                                  // _selected = index;
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      getWeekdayString(DateTime.now()
+                                          .add(Duration(days: index))
+                                          .weekday),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Text(
+                                      DateFormat.d().format(DateTime.now()
+                                          .add(Duration(days: index))),
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )),
+                          )
+                        : Container();
                   });
             },
           ),
