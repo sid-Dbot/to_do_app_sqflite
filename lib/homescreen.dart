@@ -349,7 +349,7 @@ class DayList extends ConsumerWidget {
         itemBuilder: (context, index) {
           return FutureBuilder(
               future: Future.delayed(
-                  Duration(milliseconds: index * 300), () => true),
+                  Duration(milliseconds: index * 200), () => true),
               builder: (context, snapsht) {
                 return snapsht.connectionState == ConnectionState.done
                     ? TweenAnimationBuilder(
