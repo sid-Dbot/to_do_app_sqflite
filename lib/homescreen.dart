@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -381,21 +383,15 @@ class DayList extends ConsumerWidget {
                   ),
                   tween: Tween<double>(begin: 0, end: 1),
                   builder: (context, tween, child) {
-                    return Opacity(
-                      opacity: tween,
-                      child: child,
-                    );
+                    return Opacity(opacity: tween, child: child);
                   });
             },
           ),
           tween: Tween<double>(begin: 0, end: 1),
           builder: (context, tween, child) {
-            return Opacity(
-              opacity: tween,
-              child: Padding(
-                padding: EdgeInsets.only(top: tween * 10),
-                child: child,
-              ),
+            return Transform.translate(
+              offset: Offset(0, 20 * sin(2 * pi * tween)),
+              child: child,
             );
           }),
     );
@@ -436,9 +432,19 @@ class ScreenTitle extends StatelessWidget {
                     // MyApp.themeNotifier.value = ThemeMode.light;
                   }
                 },
-                child: Icon(
-                  MySharedPrefrences.light ? Icons.light_mode : Icons.dark_mode,
-                ),
+                child: TweenAnimationBuilder(
+                    child: Icon(
+                      MySharedPrefrences.light
+                          ? Icons.light_mode
+                          : Icons.dark_mode,
+                    ),
+                    duration: Duration(milliseconds: 700),
+                    tween: Tween<double>(begin: .5, end: 1),
+                    builder: (context, tween, child) {
+                      return Transform.translate(
+                          offset: Offset(0, 20 * sin(2 * pi * tween)),
+                          child: child);
+                    }),
               );
             })
           ],
