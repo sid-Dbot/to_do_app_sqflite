@@ -441,8 +441,9 @@ class ScreenTitle extends StatelessWidget {
                     duration: Duration(milliseconds: 700),
                     tween: Tween<double>(begin: .5, end: 1),
                     builder: (context, tween, child) {
-                      return Transform.translate(
-                          offset: Offset(0, 20 * sin(2 * pi * tween)),
+                      return Transform.scale(
+                          // offset: Offset(0, 20 * sin(2 * pi * tween)),
+                          scale: tween,
                           child: child);
                     }),
               );
