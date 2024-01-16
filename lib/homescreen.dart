@@ -439,7 +439,7 @@ class ScreenTitle extends StatelessWidget {
                           : Icons.dark_mode,
                     ),
                     duration: Duration(milliseconds: 700),
-                    tween: Tween<double>(begin: .5, end: 1),
+                    tween: Tween<double>(begin: 0, end: 1),
                     builder: (context, tween, child) {
                       return Transform.scale(
                           // offset: Offset(0, 20 * sin(2 * pi * tween)),
