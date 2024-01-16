@@ -341,60 +341,60 @@ class DayList extends ConsumerWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 7,
         itemBuilder: (context, index) {
-          return TweenAnimationBuilder(
-              duration: Duration(seconds: 1),
-              child: FutureBuilder(
-                  future: Future.delayed(
-                      Duration(milliseconds: index * 100), () => true),
-                  builder: (context, snapsht) {
-                    return snapsht.connectionState == ConnectionState.done
-                        ? Container(
-                            height: 75,
-                            width: 75,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: _selected == index
-                                      ? Colors.white
-                                      : Colors.grey,
-                                  backgroundColor: _selected == index
-                                      ? Colors.deepOrange
-                                      : Theme.of(context).primaryColor,
-                                ),
-                                onPressed: () {
-                                  ref.read(SelectedDayProvider.notifier).state =
-                                      index;
-                                  // _selected = index;
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      getWeekdayString(DateTime.now()
-                                          .add(Duration(days: index))
-                                          .weekday),
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic),
-                                    ),
-                                    Text(
-                                      DateFormat.d().format(DateTime.now()
-                                          .add(Duration(days: index))),
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontStyle: FontStyle.italic,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                )),
-                          )
-                        : Container();
-                  }),
-              tween: Tween<double>(begin: 0, end: 1),
-              builder: (context, tween, child) {
-                return Transform.translate(
-                  offset: Offset(0, 20 * sin(2 * pi * tween)),
-                  child: child,
-                );
+          return FutureBuilder(
+              future: Future.delayed(
+                  Duration(milliseconds: index * 100), () => true),
+              builder: (context, snapsht) {
+                return snapsht.connectionState == ConnectionState.done
+                    ? TweenAnimationBuilder(
+                        duration: Duration(seconds: 1),
+                        child: Container(
+                          height: 75,
+                          width: 75,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: _selected == index
+                                    ? Colors.white
+                                    : Colors.grey,
+                                backgroundColor: _selected == index
+                                    ? Colors.deepOrange
+                                    : Theme.of(context).primaryColor,
+                              ),
+                              onPressed: () {
+                                ref.read(SelectedDayProvider.notifier).state =
+                                    index;
+                                // _selected = index;
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    getWeekdayString(DateTime.now()
+                                        .add(Duration(days: index))
+                                        .weekday),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                  Text(
+                                    DateFormat.d().format(DateTime.now()
+                                        .add(Duration(days: index))),
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                        ),
+                        tween: Tween<double>(begin: 0, end: 1),
+                        builder: (context, tween, child) {
+                          return Transform.translate(
+                            offset: Offset(0, 20 * sin(2 * pi * tween)),
+                            child: child,
+                          );
+                        })
+                    : Container();
               });
         },
       ),
