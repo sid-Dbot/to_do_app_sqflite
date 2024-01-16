@@ -392,7 +392,7 @@ class DayList extends ConsumerWidget {
                                 ],
                               )),
                         ),
-                        tween: Tween<double>(begin: 1, end: .5),
+                        tween: Tween<double>(begin: .9, end: .5),
                         builder: (context, tween, child) {
                           return Transform.translate(
                             offset: Offset(0, 20 * sin(2 * pi * tween)),
