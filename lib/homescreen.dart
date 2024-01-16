@@ -344,7 +344,7 @@ class DayList extends ConsumerWidget {
             itemCount: 7,
             itemBuilder: (context, index) {
               return FutureBuilder(
-                  future: Future.delayed(Duration(milliseconds: index * 100)),
+                  future: Future.delayed(Duration(seconds: index)),
                   builder: (context, snapsht) {
                     return Container(
                       height: 75,
