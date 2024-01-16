@@ -162,7 +162,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   SizedBox(
                     height: 5,
                   ),
-                  DayList(),
+                  SizedBox(
+                    child: DayList(),
+                    height: 100,
+                  ),
                   SizedBox(
                     height: 5,
                   ),
@@ -333,7 +336,7 @@ class DayList extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(4),
       width: double.infinity,
-      height: 100,
+      height: 70,
       child: ListView.separated(
         separatorBuilder: (context, index) {
           return SizedBox(
@@ -351,45 +354,41 @@ class DayList extends ConsumerWidget {
                 return snapsht.connectionState == ConnectionState.done
                     ? TweenAnimationBuilder(
                         duration: Duration(seconds: 1),
-                        child: Container(
-                          height: 75,
-                          width: 75,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: _selected == index
-                                    ? Colors.white
-                                    : Colors.grey,
-                                backgroundColor: _selected == index
-                                    ? Colors.deepOrange
-                                    : Theme.of(context).primaryColor,
-                              ),
-                              onPressed: () {
-                                ref.read(SelectedDayProvider.notifier).state =
-                                    index;
-                                // _selected = index;
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    getWeekdayString(DateTime.now()
-                                        .add(Duration(days: index))
-                                        .weekday),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                  Text(
-                                    DateFormat.d().format(DateTime.now()
-                                        .add(Duration(days: index))),
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              )),
-                        ),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: _selected == index
+                                  ? Colors.white
+                                  : Colors.grey,
+                              backgroundColor: _selected == index
+                                  ? Colors.deepOrange
+                                  : Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () {
+                              ref.read(SelectedDayProvider.notifier).state =
+                                  index;
+                              // _selected = index;
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getWeekdayString(DateTime.now()
+                                      .add(Duration(days: index))
+                                      .weekday),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                                Text(
+                                  DateFormat.d().format(DateTime.now()
+                                      .add(Duration(days: index))),
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )),
                         tween: Tween<double>(begin: 1, end: .5),
                         builder: (context, tween, child) {
                           return Transform.translate(
