@@ -152,7 +152,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onRefresh: () async {
               // getTodos();
               _getData();
-              setState(() {});
+              // setState(() {});
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
