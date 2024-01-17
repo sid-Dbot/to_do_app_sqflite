@@ -393,10 +393,11 @@ class DayList extends StatelessWidget {
                                   ],
                                 )),
                           ),
-                          tween: Tween<double>(begin: .8, end: .5),
+                          tween: Tween<double>(begin: 0, end: 1),
                           builder: (context, tween, child) {
-                            return Transform.translate(
-                              offset: Offset(0, 20 * sin(2 * pi * tween)),
+                            return Transform.scale(
+                              // offset: Offset(0, 20 * sin(2 * pi * tween)),
+                              scale: tween,
                               child: child,
                             );
                           })
