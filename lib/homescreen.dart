@@ -210,7 +210,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     },
                                     value: _done),
                                 Flexible(
-                                  flex: 6,
+                                  flex: 0,
                                   child: Text(
                                     myTodos[index].describtion,
                                     style: const TextStyle(
