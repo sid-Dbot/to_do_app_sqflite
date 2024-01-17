@@ -196,7 +196,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Container(
-                            height: 35,
+                            height: 40,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
