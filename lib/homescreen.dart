@@ -195,17 +195,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           return Row(
                             children: [
                               Container(
-                                height: 50,
-                                child: Checkbox(
-                                    shape: CircleBorder(),
-                                    onChanged: (value) {
-                                      _done = value!;
-
-                                      setState(() {});
-                                    },
-                                    value: _done),
-                              ),
-                              Container(
                                 // height: 50, width: double.infinity,
                                 // padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
