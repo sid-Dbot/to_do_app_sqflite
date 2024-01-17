@@ -197,7 +197,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             // padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
                               children: [
