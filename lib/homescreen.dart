@@ -330,7 +330,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
 class DayList extends StatelessWidget {
   @override
-  @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       int _selected = ref.watch(SelectedDayProvider);
