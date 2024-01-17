@@ -152,7 +152,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onRefresh: () async {
               // getTodos();
               _getData();
-              // setState(() {});
+              setState(() {});
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -328,82 +328,84 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
-class DayList extends ConsumerWidget {
+class DayList extends StatelessWidget {
   @override
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    int _selected = ref.watch(SelectedDayProvider);
-    return Container(
-      padding: EdgeInsets.all(4),
-      width: double.infinity,
-      height: 70,
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            width: 10,
-          );
-        },
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 7,
-        itemBuilder: (context, index) {
-          return FutureBuilder(
-              future: Future.delayed(
-                  Duration(milliseconds: index * 200), () => true),
-              builder: (context, snapsht) {
-                return snapsht.connectionState == ConnectionState.done
-                    ? TweenAnimationBuilder(
-                        duration: Duration(seconds: 1),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: _selected == index
-                                    ? Colors.white
-                                    : Colors.grey,
-                                backgroundColor: _selected == index
-                                    ? Colors.deepOrange
-                                    : Theme.of(context).primaryColor,
-                              ),
-                              onPressed: () {
-                                ref.read(SelectedDayProvider.notifier).state =
-                                    index;
-                                // _selected = index;
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    getWeekdayString(DateTime.now()
-                                        .add(Duration(days: index))
-                                        .weekday),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                  Text(
-                                    DateFormat.d().format(DateTime.now()
-                                        .add(Duration(days: index))),
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        tween: Tween<double>(begin: .8, end: .5),
-                        builder: (context, tween, child) {
-                          return Transform.translate(
-                            offset: Offset(0, 20 * sin(2 * pi * tween)),
-                            child: child,
-                          );
-                        })
-                    : Container();
-              });
-        },
-      ),
-    );
+  Widget build(BuildContext context) {
+    return Consumer(builder: (context, ref, child) {
+      int _selected = ref.watch(SelectedDayProvider);
+      return Container(
+        padding: EdgeInsets.all(4),
+        width: double.infinity,
+        height: 70,
+        child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              width: 10,
+            );
+          },
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            return FutureBuilder(
+                future: Future.delayed(
+                    Duration(milliseconds: index * 200), () => true),
+                builder: (context, snapsht) {
+                  return snapsht.connectionState == ConnectionState.done
+                      ? TweenAnimationBuilder(
+                          duration: Duration(seconds: 1),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: _selected == index
+                                      ? Colors.white
+                                      : Colors.grey,
+                                  backgroundColor: _selected == index
+                                      ? Colors.deepOrange
+                                      : Theme.of(context).primaryColor,
+                                ),
+                                onPressed: () {
+                                  ref.read(SelectedDayProvider.notifier).state =
+                                      index;
+                                  // _selected = index;
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      getWeekdayString(DateTime.now()
+                                          .add(Duration(days: index))
+                                          .weekday),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Text(
+                                      DateFormat.d().format(DateTime.now()
+                                          .add(Duration(days: index))),
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                          tween: Tween<double>(begin: .8, end: .5),
+                          builder: (context, tween, child) {
+                            return Transform.translate(
+                              offset: Offset(0, 20 * sin(2 * pi * tween)),
+                              child: child,
+                            );
+                          })
+                      : Container();
+                });
+          },
+        ),
+      );
+    });
   }
 }
 
