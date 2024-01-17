@@ -188,68 +188,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 4, horizontal: 8),
-                      child: ListView.separated(
+                      child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: 2,
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            thickness: 2,
-                            endIndent: MediaQuery.of(context).size.width - 175,
-                          );
-                        },
                         itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
-                                height: 50,
-                                // padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.transparent),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                        shape: CircleBorder(),
-                                        onChanged: (value) {
-                                          _done = value!;
+                          return Container(
+                            height: 50,
+                            // padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    shape: CircleBorder(),
+                                    onChanged: (value) {
+                                      _done = value!;
 
-                                          setState(() {});
-                                        },
-                                        value: _done),
-                                    Flexible(
-                                      flex: 6,
-                                      child: Text(
-                                        myTodos[index].describtion,
-                                        style: const TextStyle(
-                                            // color: Colors.black,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
+                                      setState(() {});
+                                    },
+                                    value: _done),
+                                Flexible(
+                                  flex: 6,
+                                  child: Text(
+                                    myTodos[index].describtion,
+                                    style: const TextStyle(
+                                        // color: Colors.black,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.red.shade600,
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            color: Colors.red.shade600,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                top: 15,
-                                child: Divider(
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
+                              ],
+                            ),
                           );
                         },
                       ),
