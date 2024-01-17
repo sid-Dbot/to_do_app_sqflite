@@ -184,64 +184,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   //       ))
                   //     :
 
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 8),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              Container(
-                                height: 50,
-                                width: double.infinity,
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                        shape: CircleBorder(),
-                                        onChanged: (value) {
-                                          _done = value!;
+                  Container(
+                    height: 500,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                    shape: CircleBorder(),
+                                    onChanged: (value) {
+                                      _done = value!;
 
-                                          setState(() {});
-                                        },
-                                        value: _done),
-                                    Flexible(
-                                      flex: 0,
-                                      child: Text(
-                                        myTodos[index].describtion,
-                                        style: const TextStyle(
-                                            // color: Colors.black,
-                                            overflow: TextOverflow.ellipsis,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            color: Colors.red.shade600,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                      setState(() {});
+                                    },
+                                    value: _done),
+                                Flexible(
+                                  flex: 0,
+                                  child: Text(
+                                    myTodos[index].describtion,
+                                    style: const TextStyle(
+                                        // color: Colors.black,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.red.shade600,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                   Column(
