@@ -203,6 +203,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                                 child: Row(
                                   children: [
+                                    Checkbox(
+                                        shape: CircleBorder(),
+                                        onChanged: (value) {
+                                          _done = value!;
+
+                                          setState(() {});
+                                        },
+                                        value: _done),
                                     Flexible(
                                       flex: 0,
                                       child: Text(
