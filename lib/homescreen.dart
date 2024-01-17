@@ -184,15 +184,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   //       ))
                   //     :
 
-                  Container(
-                    height: 500,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 2,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Row(
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 2,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 50,
+                            width: double.infinity,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
                               children: [
                                 Checkbox(
                                     shape: CircleBorder(),
@@ -227,9 +235,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                               ],
                             ),
-                          ],
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                   Column(
