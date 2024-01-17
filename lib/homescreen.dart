@@ -196,14 +196,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Container(
-                            height: 40,
+                            height: 35,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Checkbox(
                                     shape: CircleBorder(),
@@ -213,8 +213,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       setState(() {});
                                     },
                                     value: _done),
-                                Flexible(
-                                  flex: 0,
+                                Expanded(
+                                  // flex: 0,
                                   child: Text(
                                     myTodos[index].describtion,
                                     style: const TextStyle(
@@ -224,13 +224,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.red.shade600,
-                                  ),
-                                ),
+                                // IconButton(
+                                //   onPressed: () {},
+                                //   icon: Icon(
+                                //     Icons.delete_outline,
+                                //     color: Colors.red.shade600,
+                                //   ),
+                                // ),
                               ],
                             ),
                           );
