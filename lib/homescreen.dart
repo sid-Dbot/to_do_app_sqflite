@@ -164,7 +164,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   SizedBox(
                     child: DayList(),
-                    height: 100,
+                    height: 80,
                   ),
                   SizedBox(
                     height: 5,
