@@ -184,7 +184,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   //       ))
                   //     :
 
-                  Flexible(
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 4, horizontal: 8),
@@ -192,59 +192,55 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         shrinkWrap: true,
                         itemCount: 2,
                         itemBuilder: (context, index) {
-                          return Container(
-                            width: double.infinity,
-                            height: 50,
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 50,
-                                  child: Checkbox(
-                                      shape: CircleBorder(),
-                                      onChanged: (value) {
-                                        _done = value!;
+                          return Row(
+                            children: [
+                              Container(
+                                height: 50,
+                                child: Checkbox(
+                                    shape: CircleBorder(),
+                                    onChanged: (value) {
+                                      _done = value!;
 
-                                        setState(() {});
-                                      },
-                                      value: _done),
+                                      setState(() {});
+                                    },
+                                    value: _done),
+                              ),
+                              Container(
+                                // height: 50, width: double.infinity,
+                                // padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                Container(
-                                  // height: 50, width: double.infinity,
-                                  // padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Flexible(
-                                        flex: 0,
-                                        child: Text(
-                                          myTodos[index].describtion,
-                                          style: const TextStyle(
-                                              // color: Colors.black,
-                                              overflow: TextOverflow.ellipsis,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      flex: 0,
+                                      child: Text(
+                                        myTodos[index].describtion,
+                                        style: const TextStyle(
+                                            // color: Colors.black,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
                                       ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.delete_outline,
-                                              color: Colors.red.shade600,
-                                            ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: Colors.red.shade600,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           );
                         },
                       ),
