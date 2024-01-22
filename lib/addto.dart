@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:to_do_app/DB/db_service.dart';
-
 import 'package:to_do_app/Models/toDo.dart';
+
+import 'DB/dBrepo.dart';
 
 class AddTodo extends StatefulWidget {
   ToDo? todo;
@@ -14,7 +14,7 @@ class AddTodo extends StatefulWidget {
 
 class _AddTodoState extends State<AddTodo> {
   final titleController = TextEditingController();
-  DBService dbService = DBService();
+  DbService dbService = DbService();
 
   @override
   void initState() {
