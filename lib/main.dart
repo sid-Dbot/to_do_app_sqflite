@@ -16,15 +16,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeMode themeMode = ref.watch(themeModeProvider);
-    if (MySharedPrefrences.light) {
-      // ref.read(themeProvider.notifier).state = ThemeData.dark();
-      ref.read(themeModeProvider.notifier).state = ThemeMode.light;
-      // MyApp.themeNotifier.value = ThemeMode.dark;
-    } else {
-      // ref.read(themeProvider.notifier).state = ThemeData.light();
-      ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
-      // MyApp.themeNotifier.value = ThemeMode.light;
-    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
