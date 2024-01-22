@@ -120,7 +120,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Icons.add,
           ),
           onPressed: () {
-            _getData();
+            // _getData();
             showDialog(
               context: context,
               builder: (context) => AddTodo(),
