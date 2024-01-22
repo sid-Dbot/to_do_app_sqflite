@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:to_do_app/DB/dBrepo.dart';
 import 'package:to_do_app/Models/toDo.dart';
 import 'package:to_do_app/mySharedPrefrences.dart';
-
-import 'DB/db_service.dart';
 
 final themeProvider = StateProvider<ThemeData>((ref) {
   // Default theme
@@ -26,6 +25,6 @@ class TodoProvider extends StateNotifier<List<ToDoModel>> {
   List<ToDoModel> todos = [];
 
   void getTodos() async {
-    await DBService().getAllTodos().then((value) => state = value);
+    await DbService().getAllTodos().then((value) => state = value);
   }
 }
