@@ -116,9 +116,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          backgroundColor:
-              MySharedPrefrences.light ? Colors.white : Colors.grey,
-          foregroundColor: Colors.black,
           child: Icon(
             Icons.add,
           ),
