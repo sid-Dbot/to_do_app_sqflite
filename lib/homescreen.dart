@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:to_do_app/DB/db_service.dart';
+
 import 'package:to_do_app/addto.dart';
-import 'package:to_do_app/dBrepo.dart';
+import 'package:to_do_app/DB/dBrepo.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:to_do_app/Models/toDo.dart';
@@ -45,8 +45,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 // int _selected = 0;
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  DBService dbService = DBService();
-
   _getTheme() {
     if (MySharedPrefrences.light) {
       // ref.read(themeProvider.notifier).state = ThemeData.dark();
@@ -98,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void delete({required ToDoModel todo, required BuildContext context}) async {
-    DatabaseRepository().delete(todo.id).then((value) {
+    DbService().delete(todo.id).then((value) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Deleted')));
     }).catchError((e) {

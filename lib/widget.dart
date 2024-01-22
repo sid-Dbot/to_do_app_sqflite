@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:to_do_app/DB/db_service.dart';
 import 'package:to_do_app/addto.dart';
 
 import 'package:to_do_app/Models/toDo.dart';
