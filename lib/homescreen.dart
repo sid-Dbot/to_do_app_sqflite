@@ -282,7 +282,7 @@ class DayList extends StatelessWidget {
           itemBuilder: (context, index) {
             return FutureBuilder(
                 future: Future.delayed(
-                    Duration(milliseconds: index * 200), () => true),
+                    Duration(milliseconds: index * 250), () => true),
                 builder: (context, snapsht) {
                   return snapsht.connectionState == ConnectionState.done
                       ? TweenAnimationBuilder(
