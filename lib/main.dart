@@ -28,8 +28,12 @@ class MyApp extends ConsumerWidget {
         //     backgroundColor: Colors.white, foregroundColor: Colors.black),
       ),
       darkTheme: ThemeData(
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: Colors.deepOrange),
         brightness: Brightness.dark,
         checkboxTheme: CheckboxThemeData(
+          checkColor:
+              MaterialStateProperty.resolveWith((states) => Colors.black),
           fillColor: MaterialStateProperty.resolveWith(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
@@ -37,7 +41,7 @@ class MyApp extends ConsumerWidget {
                     .deepOrange; // Set your desired color for the selected checkbox in dark mode
               }
               return Colors
-                  .white; // Set your desired color for the unselected checkbox in dark mode
+                  .transparent; // Set your desired color for the unselected checkbox in dark mode
             },
           ),
         ),

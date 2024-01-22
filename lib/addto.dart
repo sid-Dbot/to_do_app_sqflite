@@ -58,11 +58,9 @@ class _AddTodoState extends State<AddTodo> {
       actionsPadding: EdgeInsets.all(16),
       actions: [
         Center(
-          child: MaterialButton(
-            color: Colors.black,
-            height: 50,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          child: ElevatedButton(
+            // color: Colors.black,
+
             onPressed: () async {
               addTodo();
             },
