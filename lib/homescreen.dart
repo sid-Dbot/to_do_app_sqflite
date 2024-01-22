@@ -47,10 +47,25 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   DBService dbService = DBService();
 
+  _getTheme() {
+    if (MySharedPrefrences.light) {
+      // ref.read(themeProvider.notifier).state = ThemeData.dark();
+      ref.read(themeModeProvider.notifier).state = ThemeMode.light;
+      // MyApp.themeNotifier.value = ThemeMode.dark;
+    } else {
+      // ref.read(themeProvider.notifier).state = ThemeData.light();
+      ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
+      // MyApp.themeNotifier.value = ThemeMode.light;
+    }
+  }
+
   @override
   void initState() {
     // getTodos();
     ref.read(todoProvider.notifier).getTodos();
+    Future.delayed(Duration.zero).then(
+      (value) => _getTheme(),
+    );
 
     super.initState();
   }
