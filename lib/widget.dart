@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do_app/DB/dBrepo.dart';
 import 'package:to_do_app/addto.dart';
 
 import 'package:to_do_app/Models/toDo.dart';
@@ -18,7 +19,7 @@ class TodoWidget extends StatefulWidget {
 }
 
 class _TodoWidgetState extends State<TodoWidget> {
-  final DBService dbService = DBService();
+  final DbService dbService = DbService();
   bool _done = false;
 
   _delete(int id) async {
