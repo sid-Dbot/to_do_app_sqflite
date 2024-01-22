@@ -365,14 +365,14 @@ class ScreenTitle extends StatelessWidget {
                 onTap: () {
                   if (MySharedPrefrences.light) {
                     MySharedPrefrences.setTheme(false);
-                    ref.read(themeProvider.notifier).state = ThemeData.dark();
-                    // ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
+                    // ref.read(themeProvider.notifier).state = ThemeData.dark();
+                    ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
                     // MyApp.themeNotifier.value = ThemeMode.dark;
                   } else {
                     MySharedPrefrences.setTheme(true);
-                    ref.read(themeProvider.notifier).state = ThemeData.light();
-                    // ref.read(themeModeProvider.notifier).state =
-                    //     ThemeMode.light;
+                    // ref.read(themeProvider.notifier).state = ThemeData.light();
+                    ref.read(themeModeProvider.notifier).state =
+                        ThemeMode.light;
                     // MyApp.themeNotifier.value = ThemeMode.light;
                   }
                 },
