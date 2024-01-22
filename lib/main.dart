@@ -23,16 +23,27 @@ class MyApp extends ConsumerWidget {
         brightness: Brightness.light,
         primaryColor: Colors.white,
         primarySwatch: Colors.deepOrange,
+
         // appBarTheme: AppBarTheme(
         //     backgroundColor: Colors.white, foregroundColor: Colors.black),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        // checkboxTheme: CheckboxThemeData(
-        //     splashRadius: 10,
-        //     fillColor: MaterialStateProperty.resolveWith(
-        //         (states) => Colors.deepOrange)),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateProperty.resolveWith(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return Colors
+                    .deepOrange; // Set your desired color for the selected checkbox in dark mode
+              }
+              return Colors
+                  .white; // Set your desired color for the unselected checkbox in dark mode
+            },
+          ),
+        ),
+
         primarySwatch: Colors.deepOrange,
+
         scaffoldBackgroundColor: Colors.grey.shade900,
         // appBarTheme: AppBarTheme(
         //     backgroundColor: Colors.black, foregroundColor: Colors.white),
