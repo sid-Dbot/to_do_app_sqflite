@@ -75,7 +75,9 @@ class _AddTodoState extends State<AddTodo> {
         onFieldSubmitted: (value) => addTodo(),
         controller: titleController,
         decoration: const InputDecoration(
-            label: const Text('Todo title'), hintText: 'Develop amazing app '),
+            border: OutlineInputBorder(gapPadding: 0),
+            label: const Text('Todo title'),
+            hintText: 'Develop amazing app '),
       ),
     );
   }
