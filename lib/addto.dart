@@ -53,8 +53,8 @@ class _AddTodoState extends State<AddTodo> {
   Widget build(BuildContext context) {
     return AlertDialog(
       // titlePadding: EdgeInsets.all(4),
-      // contentPadding: EdgeInsets.all(8),
-      actionsPadding: EdgeInsets.all(16),
+      contentPadding: EdgeInsets.all(8),
+      actionsPadding: EdgeInsets.all(8),
       actions: [
         Center(
           child: ElevatedButton(
@@ -70,16 +70,18 @@ class _AddTodoState extends State<AddTodo> {
           ),
         ),
       ],
-      title: Text('Add Todo'),
-      content: TextFormField(
-        maxLines: 4,
-        onFieldSubmitted: (value) => addTodo(),
-        controller: titleController,
-        decoration: const InputDecoration(
-            border: OutlineInputBorder(gapPadding: 0),
-            // label: const Text('Todo title'),
-            hintText: 'Develop amazing app '),
-      ),
+      // title: Text('Add Todo'),
+      content: Stack(children: [
+        TextFormField(
+          maxLines: 4,
+          onFieldSubmitted: (value) => addTodo(),
+          controller: titleController,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(gapPadding: 0),
+              // label: const Text('Todo title'),
+              hintText: 'Develop amazing app '),
+        ),
+      ]),
     );
   }
 }
