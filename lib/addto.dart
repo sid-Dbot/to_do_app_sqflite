@@ -55,21 +55,21 @@ class _AddTodoState extends State<AddTodo> {
       // titlePadding: EdgeInsets.all(4),
       contentPadding: EdgeInsets.all(8),
       actionsPadding: EdgeInsets.all(8),
-      actions: [
-        Center(
-          child: ElevatedButton(
-            // color: Colors.black,
+      // actions: [
+      //   Center(
+      //     child: ElevatedButton(
+      //       // color: Colors.black,
 
-            onPressed: () async {
-              addTodo();
-            },
-            child: const Text(
-              'Add todo',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+      //       onPressed: () async {
+      //         addTodo();
+      //       },
+      //       child: const Text(
+      //         'Add todo',
+      //         style: TextStyle(color: Colors.white),
+      //       ),
+      //     ),
+      //   ),
+      // ],
       // title: Text('Add Todo'),
       content: Stack(children: [
         TextFormField(
@@ -81,6 +81,21 @@ class _AddTodoState extends State<AddTodo> {
               // label: const Text('Todo title'),
               hintText: 'Develop amazing app '),
         ),
+        Positioned(
+          right: 10,
+          bottom: 10,
+          child: ElevatedButton(
+            // color: Colors.black,
+
+            onPressed: () async {
+              addTodo();
+            },
+            child: const Text(
+              'Add todo',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        )
       ]),
     );
   }
