@@ -14,26 +14,7 @@ import 'package:to_do_app/mySharedPrefrences.dart';
 import 'package:to_do_app/provider.dart';
 import 'package:to_do_app/widget.dart';
 
-String getWeekdayString(int weekday) {
-  switch (weekday) {
-    case 1:
-      return 'MON';
-    case 2:
-      return 'TUE';
-    case 3:
-      return 'WED';
-    case 4:
-      return 'THU';
-    case 5:
-      return 'FRI';
-    case 6:
-      return 'SAT';
-    case 7:
-      return 'SUN';
-    default:
-      return '';
-  }
-}
+import 'getWeekDayMethod.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
