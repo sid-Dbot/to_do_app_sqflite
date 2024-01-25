@@ -75,19 +75,22 @@ class _AddTodoState extends State<AddTodo> {
         ),
       ],
       // title: Text('Add Todo'),
-      content: Column(
-        children: [
-          TextFormField(
-            maxLines: 4,
-            onFieldSubmitted: (value) => addTodo(),
-            controller: titleController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(gapPadding: 0),
-                // label: const Text('Todo title'),
-                hintText: 'Develop amazing app '),
-          ),
-          DayList(),
-        ],
+      content: SizedBox(
+        height: 100,
+        child: Column(
+          children: [
+            TextFormField(
+              maxLines: 4,
+              onFieldSubmitted: (value) => addTodo(),
+              controller: titleController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(gapPadding: 0),
+                  // label: const Text('Todo title'),
+                  hintText: 'Develop amazing app '),
+            ),
+            SizedBox(height: 20, child: DayList()),
+          ],
+        ),
       ),
     );
   }
@@ -101,7 +104,7 @@ class DayList extends StatelessWidget {
       return Container(
         padding: EdgeInsets.all(4),
         width: double.infinity,
-        height: 70,
+        height: 20,
         child: ListView.separated(
           separatorBuilder: (context, index) {
             return SizedBox(
