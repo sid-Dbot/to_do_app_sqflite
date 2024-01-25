@@ -86,6 +86,7 @@ class _AddTodoState extends State<AddTodo> {
                 // label: const Text('Todo title'),
                 hintText: 'Develop amazing app '),
           ),
+          DayList(),
         ],
       ),
     );
