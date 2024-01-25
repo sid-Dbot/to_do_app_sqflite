@@ -79,6 +79,7 @@ class _AddTodoState extends State<AddTodo> {
         dimension: 200,
         child: Column(
           children: [
+            SizedBox(height: 60, child: DayList()),
             TextFormField(
               maxLines: 4,
               onFieldSubmitted: (value) => addTodo(),
@@ -88,7 +89,6 @@ class _AddTodoState extends State<AddTodo> {
                   // label: const Text('Todo title'),
                   hintText: 'Develop amazing app '),
             ),
-            SizedBox(height: 60, child: DayList()),
           ],
         ),
       ),
