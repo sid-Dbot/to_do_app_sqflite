@@ -75,8 +75,8 @@ class _AddTodoState extends State<AddTodo> {
         ),
       ],
       // title: Text('Add Todo'),
-      content: SizedBox(
-        height: 100,
+      content: SizedBox.square(
+        dimension: 170,
         child: Column(
           children: [
             TextFormField(
@@ -88,7 +88,7 @@ class _AddTodoState extends State<AddTodo> {
                   // label: const Text('Todo title'),
                   hintText: 'Develop amazing app '),
             ),
-            SizedBox(height: 20, child: DayList()),
+            SizedBox(height: 10, child: DayList()),
           ],
         ),
       ),
@@ -104,7 +104,7 @@ class DayList extends StatelessWidget {
       return Container(
         padding: EdgeInsets.all(4),
         width: double.infinity,
-        height: 20,
+        height: 10,
         child: ListView.separated(
           separatorBuilder: (context, index) {
             return SizedBox(
